@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C500627018AD348800371E5D /* MMPPluginMissing.h in Headers */ = {isa = PBXBuildFile; fileRef = C500626E18AD348800371E5D /* MMPPluginMissing.h */; };
 		C500627118AD348800371E5D /* MMPPluginMissing.m in Sources */ = {isa = PBXBuildFile; fileRef = C500626F18AD348800371E5D /* MMPPluginMissing.m */; };
+		C50062C018AFDCBC00371E5D /* MMPAttributedStringBase.h in Headers */ = {isa = PBXBuildFile; fileRef = C50062BE18AFDCBC00371E5D /* MMPAttributedStringBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C50062C118AFDCBC00371E5D /* MMPAttributedStringBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C50062BF18AFDCBC00371E5D /* MMPAttributedStringBase.m */; };
 		C55081AA18A1757600F4D77A /* MMPMimeProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = C55081A818A1757600F4D77A /* MMPMimeProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C55081AB18A1757600F4D77A /* MMPMimeProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C55081A918A1757600F4D77A /* MMPMimeProxy.m */; };
 		C55081AC18A1757600F4D77A /* MMPMimeProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C55081A918A1757600F4D77A /* MMPMimeProxy.m */; };
@@ -41,6 +43,8 @@
 /* Begin PBXFileReference section */
 		C500626E18AD348800371E5D /* MMPPluginMissing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPPluginMissing.h; sourceTree = "<group>"; };
 		C500626F18AD348800371E5D /* MMPPluginMissing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPPluginMissing.m; sourceTree = "<group>"; };
+		C50062BE18AFDCBC00371E5D /* MMPAttributedStringBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPAttributedStringBase.h; sourceTree = "<group>"; };
+		C50062BF18AFDCBC00371E5D /* MMPAttributedStringBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPAttributedStringBase.m; sourceTree = "<group>"; };
 		C55081A818A1757600F4D77A /* MMPMimeProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPMimeProxy.h; sourceTree = "<group>"; };
 		C55081A918A1757600F4D77A /* MMPMimeProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPMimeProxy.m; sourceTree = "<group>"; };
 		C583065818A6AA45006C279D /* MBMimeViewerPluginsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBMimeViewerPluginsManager.h; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 				C55081A918A1757600F4D77A /* MMPMimeProxy.m */,
 				C500626E18AD348800371E5D /* MMPPluginMissing.h */,
 				C500626F18AD348800371E5D /* MMPPluginMissing.m */,
+				C50062BE18AFDCBC00371E5D /* MMPAttributedStringBase.h */,
+				C50062BF18AFDCBC00371E5D /* MMPAttributedStringBase.m */,
 			);
 			name = MoedaeMailPlugins;
 			path = MoedaeMailPluginsBase;
@@ -185,9 +191,10 @@
 				C583065E18A6AD32006C279D /* MoedaeMailPlugins.h in Headers */,
 				C583065A18A6AA45006C279D /* MBMimeViewerPluginsManager.h in Headers */,
 				C5B8326218A2B46600A94197 /* MMPTextViewWithIntrinsic.h in Headers */,
-				C500627018AD348800371E5D /* MMPPluginMissing.h in Headers */,
+				C50062C018AFDCBC00371E5D /* MMPAttributedStringBase.h in Headers */,
 				C55081B218A178CB00F4D77A /* MMPBaseMimeView.h in Headers */,
 				C55081AA18A1757600F4D77A /* MMPMimeProxy.h in Headers */,
+				C500627018AD348800371E5D /* MMPPluginMissing.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C50062C118AFDCBC00371E5D /* MMPAttributedStringBase.m in Sources */,
 				C5BB136A18A14B9D001B513E /* MMPBaseMimeView.m in Sources */,
 				C583065B18A6AA45006C279D /* MBMimeViewerPluginsManager.m in Sources */,
 				C500627118AD348800371E5D /* MMPPluginMissing.m in Sources */,

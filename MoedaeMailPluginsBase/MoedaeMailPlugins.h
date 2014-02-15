@@ -7,6 +7,7 @@
 //
 
 #import <MoedaeMailPlugins/MMPBaseMimeView.h>
+#import <MoedaeMailPlugins/MMPAttributedStringBase.h>
 #import <MoedaeMailPlugins/MMPMimeProxy.h>
 #import <MoedaeMailPlugins/MMPTextViewWithIntrinsic.h>
 #import <MoedaeMailPlugins/MBMimeViewerPluginsManager.h>
