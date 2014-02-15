@@ -68,7 +68,11 @@ NSString* MBRichMessageViewAttributeName = @"MBRichMessageView";
 }
 
 -(void) createSubviews {
-    
+    [self addSubview: self.mimeView];
+    [self.mimeView setTranslatesAutoresizingMaskIntoConstraints: NO];
+    [self.mimeView removeConstraints: self.mimeView.constraints];
+    [self removeConstraints: self.constraints];
+    [self setNeedsUpdateConstraints: YES];
 }
 
 -(void) removeSubviews {
