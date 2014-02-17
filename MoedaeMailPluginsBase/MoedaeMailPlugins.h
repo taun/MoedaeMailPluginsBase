@@ -11,5 +11,4 @@
 #import <MoedaeMailPlugins/MMPMimeProxy.h>
 #import <MoedaeMailPlugins/MMPTextViewWithIntrinsic.h>
 #import <MoedaeMailPlugins/MBMimeViewerPluginsManager.h>
-
-extern NSString* MBRichMessageViewAttributeName;
+#import <MoedaeMailPlugins/MMPMessageViewOptions.h>

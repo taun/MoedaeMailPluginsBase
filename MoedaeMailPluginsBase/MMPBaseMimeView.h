@@ -7,6 +7,7 @@
 //
 
 @class MMPMimeProxy;
+@class MMPMessageViewOptions;
 
 /*
  5.1.  Syntax of the Content-Type Header Field
@@ -46,11 +47,9 @@
  */
 @interface MMPBaseMimeView : NSView
 
-@property (nonatomic,strong) MMPMimeProxy       *node;
-@property (nonatomic,strong) NSDictionary       *options;
-@property (nonatomic,strong) NSDictionary       *attributes;
-@property (nonatomic,strong) NSView             *mimeView;
-@property (nonatomic,readonly) BOOL             wantsRichTextPresentation;
+@property (nonatomic,strong) MMPMimeProxy           *node;
+@property (nonatomic,strong) MMPMessageViewOptions  *options;
+@property (nonatomic,strong) NSView                 *mimeView;
 
 /*
  content := "Content-Type" ":" type "/" subtype *(";" parameter) ; Matching of media type and subtype is ALWAYS case-insensitive.
@@ -68,7 +67,7 @@
 - (unsigned)interfaceVersion;
 
 /* designated initializer */
--(instancetype) initWithFrame:(NSRect)frameRect node: (MMPMimeProxy*)node options: (NSDictionary*) options attributes: (NSDictionary*) attributes;
+-(instancetype) initWithFrame:(NSRect)frameRect node: (MMPMimeProxy*)node options: (MMPMessageViewOptions*) options;
 
 /* abstract, probably should be made private */
 -(void) createSubviews;

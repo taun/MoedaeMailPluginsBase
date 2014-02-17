@@ -8,8 +8,6 @@
 
 #import <MoedaeMailPlugins/MoedaeMailPlugins.h>
 
-NSString* MBRichMessageViewAttributeName = @"MBRichMessageView";
-
 @implementation MMPBaseMimeView
 
 +(NSSet*) contentTypes {
@@ -39,32 +37,18 @@ NSString* MBRichMessageViewAttributeName = @"MBRichMessageView";
     }
 }
 
--(instancetype) initWithFrame:(NSRect)frameRect node:(MMPMimeProxy *)node options:(NSDictionary *)options attributes:(NSDictionary *)attributes {
+-(instancetype) initWithFrame:(NSRect)frameRect node:(MMPMimeProxy *)node options:(MMPMessageViewOptions *)options {
     self = [super initWithFrame: frameRect];
     if (self) {
         // Initialization code here.
         [self setOptions: options];
-        [self setAttributes: attributes];
         [self setNode: node];
     }
     return self;
 }
 
 - (instancetype)initWithFrame:(NSRect)frame {
-    return [self initWithFrame: frame node: nil options: nil attributes: nil];
-}
-
-
--(BOOL) wantsRichTextPresentation {
-    BOOL useRichMessageView = NO;
-    
-    id useRichMessageViewOption = self.options[MBRichMessageViewAttributeName];
-    
-    if (useRichMessageViewOption && [useRichMessageViewOption isKindOfClass: [NSNumber class]]) {
-        useRichMessageView = [(NSNumber*)useRichMessageViewOption boolValue];
-    }
-    
-    return useRichMessageView;
+    return [self initWithFrame: frame node: nil options: nil];
 }
 
 -(void) createSubviews {
