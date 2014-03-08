@@ -19,6 +19,8 @@
  @param command  the token value as a string. Will be CamelCased. Non method safe characters will be removed such as spaces hyphens, ...
  @param prefix   the prefix. Will be prefixed to CapitaliseCamelCased token. Ex prefixedCommandCase
  @param fallback fallback method to be performed.
+ 
+ @see performCleanedSelectorString:prefixedBy:fallbackSelector:withObject:
  */
 -(void) performCleanedSelectorString: (NSString*)command prefixedBy: (NSString*) prefix fallbackSelector: (NSString*) fallback;
 /*!
