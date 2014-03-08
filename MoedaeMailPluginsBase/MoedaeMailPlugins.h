@@ -12,3 +12,10 @@
 #import <MoedaeMailPlugins/MMPTextViewWithIntrinsic.h>
 #import <MoedaeMailPlugins/MBMimeViewerPluginsManager.h>
 #import <MoedaeMailPlugins/MMPMessageViewOptions.h>
+
+#import <MoedaeMailPlugins/NSString+IMAPConversions.h>
+#import <MoedaeMailPlugins/NSObject+MBShorthand.h>
+#import <MoedaeMailPlugins/NSScanner+IMAPConversions.h>
+#import <MoedaeMailPlugins/NSObject+TokenDispatch.h>
+#import <MoedaeMailPlugins/SimpleRFC822Address.h>
+#import <MoedaeMailPlugins/MBoxProxy.h>
