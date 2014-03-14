@@ -1,14 +1,23 @@
 //
 //  SimpleRFC822Address.m
-//  MailBoxes
+//  MoedaeMailPlugins
 //
 //  Created by Taun Chapman on 11/1/11.
 //  Copyright (c) 2011 MOEDAE LLC. All rights reserved.
 //
 
-#import <MoedaeMailPlugins/SimpleRFC822Address.h>
+#import "SimpleRFC822Address.h"
+#import "NSString+IMAPConversions.h"
+#import "NSObject+MBShorthand.h"
+
 
 @implementation SimpleRFC822Address
+
++(instancetype) newAddressFromString:(NSString *)emailString {
+    SimpleRFC822Address *newAddress = [emailString mdcSimpleRFC822Address];
+    
+    return newAddress;
+}
 
 +(instancetype) newAddressName:(NSString *)name email:(NSString *)email {
     return [[SimpleRFC822Address alloc] initWithName:name email:email];
@@ -51,11 +60,11 @@
 
 -(NSString*) description {
     return [NSString stringWithFormat:@"%@ Name: %@; E-Mail: %@; Mailbox: %@; Domain: %@;",
-            [super description], self.name, self.email, self.mailbox, self.domain];
+            [super description], _name, _email, _mailbox, _domain];
 }
 -(NSString*) debugDescription {
     return [NSString stringWithFormat:@"%@ Name: %@; E-Mail: %@; Mailbox: %@; Domain: %@;",
-            [super description], self.name, self.email, self.mailbox, self.domain];
+            [super description], _name, _email, _mailbox, _domain];
 }
 
 - (NSUInteger)hash {
@@ -66,23 +75,27 @@
 - (BOOL)isEqual:(id)other {
     BOOL equality = NO;
     
-    if (other == self)
-        return YES;
-    
-    if ([self name]) {
-        // if self.name is non-nil then other.name should be non-nil and equal to be an equal object.
-        equality = [[self name] isEqualToString:[other name]];
-    } else if (![other name]){
-        // both == nil
-        equality = YES; // chance at equality
-    }
-
-    if (equality && [[self email] isEqualToString:[other email]]
-        && [[self mailbox] isEqualToString:[other mailbox]]
-        && [[self domain] isEqualToString:[other domain]]) {
-        equality = YES;
-    } else {
-        equality = NO;
+    if ([other isKindOfClass: [SimpleRFC822Address class]]) {
+        SimpleRFC822Address *otherEmail = (SimpleRFC822Address*) other;
+        if (otherEmail == self){
+            equality = YES;
+        } else {
+            if ([self.name isNonNilString]) {
+                // if self.name is non-nil then other.name should be non-nil and equal to be an equal object.
+                equality = [self.name isEqualToString: otherEmail.name];
+            } else if (![otherEmail.name isNonNilString]){
+                // both == nil
+                equality = YES; // chance at equality
+            }
+            
+            if (equality && [self.email isEqualToString: otherEmail.email]
+                && [self.mailbox isEqualToString: otherEmail.mailbox]
+                && [self.domain isEqualToString: otherEmail.domain]) {
+                equality = YES;
+            } else {
+                equality = NO;
+            }
+        }
     }
     
     return equality;

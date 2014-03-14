@@ -1,6 +1,6 @@
 //
 //  NSScanner+IMAPConversions.m
-//  MailBoxes
+//  MoedaeMailPlugins
 //
 //  Created by Taun Chapman on 03/07/14.
 //  Copyright (c) 2014 MOEDAE LLC. All rights reserved.
@@ -42,4 +42,10 @@
     return hexCode;
 }
 
+-(SimpleRFC822Address*) mdcScanRfc822Address {
+    SimpleRFC822Address *nextAddress;
+    
+    
+    return nextAddress;
+}
 @end

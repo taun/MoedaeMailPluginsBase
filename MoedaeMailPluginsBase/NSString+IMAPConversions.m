@@ -116,7 +116,7 @@
 
 -(NSString*) mdcStringFromBase64WithCharset: (int) encodingCharset {
     
-    NSData* decodedData = [[NSData alloc] initWithBase64Encoding: self];
+    NSData* decodedData = [[NSData alloc] initWithBase64EncodedString: self options: NSDataBase64DecodingIgnoreUnknownCharacters];
     NSString* decodedString = [[NSString alloc] initWithData: decodedData encoding: encodingCharset];
     
     return decodedString;
@@ -179,9 +179,9 @@
         NSLog(@"Encoding Fields Error: %@", error);
     }
     
-    NSRegularExpression* regexQSpaces = [[NSRegularExpression alloc] initWithPattern: @"=([0-9a-zA-Z][0-9a-zA-Z]?)|(_)"
-                                                        options: NSRegularExpressionCaseInsensitive
-                                                          error: &error];
+//    NSRegularExpression* regexQSpaces = [[NSRegularExpression alloc] initWithPattern: @"=([0-9a-zA-Z][0-9a-zA-Z]?)|(_)"
+//                                                        options: NSRegularExpressionCaseInsensitive
+//                                                          error: &error];
     if (error) {
         NSLog(@"Q Spaces Error: %@", error);
     }
@@ -230,7 +230,6 @@
             NSRange encodedRange;
             NSNumber* encodingNumber = [charsetString mdcNumberFromIANACharset];
             
-#pragma message "Need to handle charset not found"
             int encoding = [encodingNumber intValue]; //TODO: handle charset not found.
             if ([tcr rangeAtIndex: bCodeRangeIndex].length != 0) {
                 // b encoded
@@ -240,8 +239,16 @@
                     //                    const char* encodedCString
                     //                    [decodedString appendString: encodedString];
                     NSString* encodedString = [self substringWithRange: encodedRange];
-                    NSString* fullyDecodedString = [encodedString mdcStringFromBase64WithCharset: encoding];
-                    [decodedString appendString: fullyDecodedString];
+                    NSString* decodedFragment = [encodedString mdcStringFromBase64WithCharset: encoding];
+                    if (!decodedFragment && (encoding != NSASCIIStringEncoding)) {
+                        // designated encoding failed, fallback to ascii
+                        decodedFragment = [encodedString mdcStringFromBase64WithCharset: NSASCIIStringEncoding];
+                    }
+                    if (!decodedFragment) {
+                        // couldn't convert so fall back to just using the raw string
+                        decodedFragment = encodedString;
+                    }
+                    [decodedString appendString: decodedFragment];
                 }
             } else if ([tcr rangeAtIndex: qCodeRangeIndex].length != 0) {
                 // q encoded
@@ -251,7 +258,12 @@
                     const char* encodedCString = [encodedString cStringUsingEncoding: NSASCIIStringEncoding];
                     NSString* cString = [NSString stringWithCString: encodedCString encoding: encoding];
                     // search and replace "=XX" and "_"
-                     [decodedString appendString: [cString mdcStringFromQEncodedAsciiHexInCharset: encoding]];
+                    NSString *decodedFragment = [cString mdcStringFromQEncodedAsciiHexInCharset: encoding];
+                    if (!decodedFragment) {
+                        // fall back to raw string
+                        decodedFragment = cString;
+                    }
+                     [decodedString appendString: decodedFragment];
                 }
             } else {
                 // unknown encoding?? assert?
@@ -424,7 +436,7 @@
 -(NSString*) mdcStringDeQuotedPrintableFromCharset: (int) encodingCharset {
     NSString* dequotedPrintable;
     
-
+    
     dequotedPrintable = [self mdcStringFromQEncodedAsciiHexInCharset: encodingCharset];
     
     NSString* softReturn = @"=\r\n";
@@ -446,19 +458,78 @@
     return dequotedPrintable;
 }
 
+
+
+
+
+
+
+
+
+
+
 -(id) mdcNumberFromIANACharset {
     NSNumber* nsDomainCharset;
     
     NSDictionary* mdcCharsetMap = @{@"US-ASCII": @(NSASCIIStringEncoding),
-                    @"UTF-8": @(NSUTF8StringEncoding),
-                    @"ISO-8859-1": @(NSISOLatin1StringEncoding),
-                    @"KOI8-R": @(NSWindowsCP1251StringEncoding),
-                    @"US-ASCII2": @(NSNonLossyASCIIStringEncoding)};
+                                    @"CSASCII": @(NSASCIIStringEncoding),
+                                    @"CP367": @(NSASCIIStringEncoding),
+                                    @"IBM367": @(NSASCIIStringEncoding),
+                                    @"US": @(NSASCIIStringEncoding),
+                                    @"ISO646-US": @(NSASCIIStringEncoding),
+                                    @"ISO_646.IRV:1991": @(NSASCIIStringEncoding),
+                                    @"ANSI_X3.4-1986": @(NSASCIIStringEncoding),
+                                    @"ANSI_X3.4-1968": @(NSASCIIStringEncoding),
+                                    @"SO-IR-6": @(NSASCIIStringEncoding),
+                                    
+                                    @"US-ASCII2": @(NSNonLossyASCIIStringEncoding),
+                                    @"UTF-8": @(NSUTF8StringEncoding),
+                                    @"CSUTF8": @(NSUTF8StringEncoding),
+                                    @"UTF-16": @(NSUnicodeStringEncoding),
+                                    @"UTF-32": @(NSUTF32StringEncoding),
+                                    
+                                    @"ISO-8859-1": @(NSISOLatin1StringEncoding),
+                                    @"ISO_8859-1": @(NSISOLatin1StringEncoding),
+                                    @"LATIN1": @(NSISOLatin1StringEncoding),
+                                    @"L1": @(NSISOLatin1StringEncoding),
+                                    @"IBM819": @(NSISOLatin1StringEncoding),
+                                    @"CP819": @(NSISOLatin1StringEncoding),
+                                    @"CSISOLATIN1": @(NSISOLatin1StringEncoding),
+                                    
+                                    @"CP1250":@(NSWindowsCP1250StringEncoding),
+                                    @"WINDOWS-1250":@(NSWindowsCP1250StringEncoding),
+                                    @"CSWINDOWS1250":@(NSWindowsCP1250StringEncoding),
+                                    
+                                    @"KOI8-R": @(NSWindowsCP1251StringEncoding),
+                                    @"CP1251":@(NSWindowsCP1251StringEncoding),
+                                    @"WINDOWS-1251":@(NSWindowsCP1251StringEncoding),
+                                    @"CSWINDOWS1251":@(NSWindowsCP1251StringEncoding),
+                                    
+                                    @"CP1252":@(NSWindowsCP1252StringEncoding),
+                                    @"WINDOWS-1252":@(NSWindowsCP1252StringEncoding),
+                                    @"CSWINDOWS1252":@(NSWindowsCP1252StringEncoding),
+                                    
+                                    @"CP1253":@(NSWindowsCP1253StringEncoding),
+                                    @"WINDOWS-1253":@(NSWindowsCP1253StringEncoding),
+                                    @"CSWINDOWS1253":@(NSWindowsCP1253StringEncoding),
+                                    
+                                    @"CP1254":@(NSWindowsCP1254StringEncoding),
+                                    @"WINDOWS-1254":@(NSWindowsCP1254StringEncoding),
+                                    @"CSWINDOWS1254":@(NSWindowsCP1254StringEncoding),
+                                    
+                                    @"ISO-2022": @(NSISO2022JPStringEncoding),
+                                    @"CSISO2022JP": @(NSISO2022JPStringEncoding),
+                                    
+                                    };
     
-        // should be a string
-        NSString* upperCaseMimeCharset = [self uppercaseString];
-        nsDomainCharset = [mdcCharsetMap objectForKey: upperCaseMimeCharset];
-
+    // should be a string
+    NSString* upperCaseMimeCharset = [self uppercaseString];
+    nsDomainCharset = [mdcCharsetMap objectForKey: upperCaseMimeCharset];
+    if (!nsDomainCharset) {
+        // default to ASCII
+        nsDomainCharset = @(NSASCIIStringEncoding);
+    }
+    
     return nsDomainCharset;
 }
 

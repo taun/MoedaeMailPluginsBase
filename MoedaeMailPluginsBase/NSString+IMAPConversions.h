@@ -64,11 +64,10 @@
 -(SimpleRFC822Address*) mdcSimpleRFC822Address;
 
 /*!
- Transforms from MIME strings representing a character set to an NSNumber representing an NS domain character set.
+ Transforms from IANA charset strings representing a character set to an NSNumber representing an NS domain character set.
+ Converts charset string to uppercase.
  
- Will handle upper or lower case MIME strings.
- 
- @returns nil if charset is not found.
+ @returns default value of NSASCIIStringEncoding if charset is not found.
  */
 -(id) mdcNumberFromIANACharset;
 

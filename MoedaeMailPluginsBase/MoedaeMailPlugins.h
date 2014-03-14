@@ -18,4 +18,5 @@
 #import <MoedaeMailPlugins/NSScanner+IMAPConversions.h>
 #import <MoedaeMailPlugins/NSObject+TokenDispatch.h>
 #import <MoedaeMailPlugins/SimpleRFC822Address.h>
+#import <MoedaeMailPlugins/SimpleRFC822GroupAddress.h>
 #import <MoedaeMailPlugins/MBoxProxy.h>
