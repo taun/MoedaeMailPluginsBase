@@ -7,6 +7,7 @@
 //
 
 #import "SimpleRFC822Address.h"
+#import "SimpleRFC822GroupAddress.h"
 #import "NSString+IMAPConversions.h"
 #import "NSObject+MBShorthand.h"
 
@@ -14,15 +15,47 @@
 @implementation SimpleRFC822Address
 
 +(instancetype) newAddressFromString:(NSString *)emailString {
-    SimpleRFC822Address *newAddress = [emailString mdcSimpleRFC822Address];
-    
-    return newAddress;
+    return [[SimpleRFC822Address alloc] initWithString: emailString];
 }
 
 +(instancetype) newAddressName:(NSString *)name email:(NSString *)email {
     return [[SimpleRFC822Address alloc] initWithName:name email:email];
 }
-
+-(instancetype) initWithString:(NSString *)fullEmailString {
+    NSString* name;
+    NSString* email;
+    
+    NSString* addressString = [fullEmailString stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if ([addressString isNonNilString]) {
+        NSMutableCharacterSet* addressDelimiters = [NSMutableCharacterSet characterSetWithCharactersInString: @"<>"];
+        [addressDelimiters formUnionWithCharacterSet: [NSCharacterSet whitespaceCharacterSet]];
+        
+        NSMutableCharacterSet* nameDelimiters = [NSMutableCharacterSet characterSetWithCharactersInString: @"\""];
+        [nameDelimiters formUnionWithCharacterSet: [NSCharacterSet whitespaceCharacterSet]];
+        
+        // Find space between name and address "first last <mailbox@domain>"
+        NSRange lastSpace = [addressString rangeOfString: @" " options: NSBackwardsSearch];
+        
+        if (lastSpace.location != NSNotFound) {
+            
+            NSString* potentiallyEncodedWord = [[addressString substringWithRange: NSMakeRange(0, lastSpace.location)]
+                                                stringByTrimmingCharactersInSet: nameDelimiters];
+            
+            NSString* potentiallyDecodedWord = [potentiallyEncodedWord mdcStringByDecodingRFC2047];
+            
+            name =  potentiallyDecodedWord;
+            
+            email = [[addressString substringWithRange: NSMakeRange(lastSpace.location+1, addressString.length-lastSpace.location-1)]
+                                stringByTrimmingCharactersInSet: addressDelimiters];
+        } else {
+            // only have <mailbox@domain>
+            email = [addressString stringByTrimmingCharactersInSet: addressDelimiters];
+        }
+    }
+    
+    return [[SimpleRFC822Address alloc] initWithName: name email: email];
+}
 /* designated initializer */
 -(instancetype) initWithName:(NSString *)name email:(NSString *)email {
     self = [super init];
@@ -68,8 +101,11 @@
 }
 
 - (NSUInteger)hash {
-    NSString* fullAddress = [NSString stringWithFormat:@"%@ %@ %@ %@", _name, _email, _mailbox, _domain];
-    return [fullAddress hash];
+    NSUInteger nameHash = [_name hash];
+    nameHash += [_email hash];
+//    NSString* fullAddress = [NSString stringWithFormat:@"%@ %@ %@ %@", _name, _email, _mailbox, _domain];
+//    NSLog(@"Hash: %lu, Self: %@",nameHash,_email);
+    return nameHash;
 }
 
 - (BOOL)isEqual:(id)other {
@@ -96,8 +132,15 @@
                 equality = NO;
             }
         }
+    } else if ([other isKindOfClass:[SimpleRFC822GroupAddress class]]) {
+        // comparing address to group
+//        NSLog(@"Comparing group to address");
     }
-    
+
+//    NSLog(@"Self:%lu - %@",[self hash], self);
+//    NSLog(@"Other:%lu - %@",[other hash], other);
+//    NSLog(@"Result: %hhd", equality);
+
     return equality;
 }
 @end

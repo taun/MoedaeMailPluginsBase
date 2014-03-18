@@ -14,6 +14,7 @@
 #import <MoedaeMailPlugins/MMPMessageViewOptions.h>
 
 #import <MoedaeMailPlugins/NSString+IMAPConversions.h>
+#import <MoedaeMailPlugins/NSDate+IMAPConversions.h>
 #import <MoedaeMailPlugins/NSObject+MBShorthand.h>
 #import <MoedaeMailPlugins/NSScanner+IMAPConversions.h>
 #import <MoedaeMailPlugins/NSObject+TokenDispatch.h>

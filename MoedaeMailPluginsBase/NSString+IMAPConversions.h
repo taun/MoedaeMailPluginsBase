@@ -14,18 +14,6 @@
 
 
 /*!
- RFC822 Header Format = Tue, 12 Feb 2008 09:36:17 -0500
- INTERNALDATE Format =  "26-Jul-2011 07:48:41 -0400"
- */
--(NSDate*) mdcDateFromRFC3501Format;
-
-/*!
- RFC822 Header Format = Tue, 12 Feb 2008 09:36:17 -0500
- RFC822 Header Format = Tue, 12 Feb 2008 09:36:17 "GMT"  obsolete
- */
--(NSDate*) mdcDateFromRFC822Format;
-
-/*!
  Capitalizes the string then removes non-characters.
  commands like READ-ONLY become ReadOnly
 
@@ -50,6 +38,8 @@
  */
 -(NSString*) mdcStringByDecodingRFC2047;
 
+-(NSString*) mdcStringByRemovingRFCComments;
+
 -(NSString*) mdcStringDeQuotedPrintableFromCharset: (int) encodingCharset;
 
 
@@ -61,14 +51,12 @@
  */
 -(NSString*) mdcStringFromQEncodedAsciiHexInCharset: (int) encodingCharset;
 
--(SimpleRFC822Address*) mdcSimpleRFC822Address;
-
 /*!
  Transforms from IANA charset strings representing a character set to an NSNumber representing an NS domain character set.
  Converts charset string to uppercase.
  
- @returns default value of NSASCIIStringEncoding if charset is not found.
+ @return default value of NSASCIIStringEncoding if charset is not found.
  */
--(id) mdcNumberFromIANACharset;
+-(NSNumber*) mdcNumberFromIANACharset;
 
 @end

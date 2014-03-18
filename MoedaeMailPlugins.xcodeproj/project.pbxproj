@@ -11,15 +11,15 @@
 		C500627118AD348800371E5D /* MMPPluginMissing.m in Sources */ = {isa = PBXBuildFile; fileRef = C500626F18AD348800371E5D /* MMPPluginMissing.m */; };
 		C50062C018AFDCBC00371E5D /* MMPAttributedStringBase.h in Headers */ = {isa = PBXBuildFile; fileRef = C50062BE18AFDCBC00371E5D /* MMPAttributedStringBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C50062C118AFDCBC00371E5D /* MMPAttributedStringBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C50062BF18AFDCBC00371E5D /* MMPAttributedStringBase.m */; };
+		C52507ED18D390A800A47E8F /* NSDate+IMAPConversions.h in Headers */ = {isa = PBXBuildFile; fileRef = C52507EB18D390A800A47E8F /* NSDate+IMAPConversions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C52507EE18D390A800A47E8F /* NSDate+IMAPConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = C52507EC18D390A800A47E8F /* NSDate+IMAPConversions.m */; };
 		C530E0CF18B19EFE00EF1E37 /* MMPMessageViewOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = C530E0CD18B19EFE00EF1E37 /* MMPMessageViewOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C530E0D018B19EFE00EF1E37 /* MMPMessageViewOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = C530E0CE18B19EFE00EF1E37 /* MMPMessageViewOptions.m */; };
 		C55081AA18A1757600F4D77A /* MMPMimeProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = C55081A818A1757600F4D77A /* MMPMimeProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C55081AB18A1757600F4D77A /* MMPMimeProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C55081A918A1757600F4D77A /* MMPMimeProxy.m */; };
-		C55081AC18A1757600F4D77A /* MMPMimeProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C55081A918A1757600F4D77A /* MMPMimeProxy.m */; };
 		C55081B218A178CB00F4D77A /* MMPBaseMimeView.h in Headers */ = {isa = PBXBuildFile; fileRef = C5BB136818A14B9D001B513E /* MMPBaseMimeView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C578655418D24505007C03C6 /* SimpleRFC822GroupAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = C578655218D24505007C03C6 /* SimpleRFC822GroupAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C578655518D24505007C03C6 /* SimpleRFC822GroupAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = C578655318D24505007C03C6 /* SimpleRFC822GroupAddress.m */; };
-		C578655618D24505007C03C6 /* SimpleRFC822GroupAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = C578655318D24505007C03C6 /* SimpleRFC822GroupAddress.m */; };
 		C578655718D27515007C03C6 /* NSString+IMAPConversions.h in Resources */ = {isa = PBXBuildFile; fileRef = C5FA233C18CA916C005C2202 /* NSString+IMAPConversions.h */; };
 		C578655818D27519007C03C6 /* SimpleRFC822Address.h in Resources */ = {isa = PBXBuildFile; fileRef = C5FA233218CA915D005C2202 /* SimpleRFC822Address.h */; };
 		C578655918D27526007C03C6 /* SimpleRFC822GroupAddress.h in Resources */ = {isa = PBXBuildFile; fileRef = C578655218D24505007C03C6 /* SimpleRFC822GroupAddress.h */; };
@@ -39,22 +39,16 @@
 		C5CF258518D2903900CEEC6A /* MoedaeMailPlugins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5BB135818A14B9D001B513E /* MoedaeMailPlugins.framework */; };
 		C5FA233618CA915D005C2202 /* SimpleRFC822Address.h in Headers */ = {isa = PBXBuildFile; fileRef = C5FA233218CA915D005C2202 /* SimpleRFC822Address.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5FA233718CA915D005C2202 /* SimpleRFC822Address.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA233318CA915D005C2202 /* SimpleRFC822Address.m */; };
-		C5FA233818CA915D005C2202 /* SimpleRFC822Address.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA233318CA915D005C2202 /* SimpleRFC822Address.m */; };
 		C5FA233918CA915D005C2202 /* MBoxProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = C5FA233418CA915D005C2202 /* MBoxProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5FA233A18CA915D005C2202 /* MBoxProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA233518CA915D005C2202 /* MBoxProxy.m */; };
-		C5FA233B18CA915D005C2202 /* MBoxProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA233518CA915D005C2202 /* MBoxProxy.m */; };
 		C5FA234418CA916C005C2202 /* NSString+IMAPConversions.h in Headers */ = {isa = PBXBuildFile; fileRef = C5FA233C18CA916C005C2202 /* NSString+IMAPConversions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5FA234518CA916C005C2202 /* NSString+IMAPConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA233D18CA916C005C2202 /* NSString+IMAPConversions.m */; };
-		C5FA234618CA916C005C2202 /* NSString+IMAPConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA233D18CA916C005C2202 /* NSString+IMAPConversions.m */; };
 		C5FA234718CA916C005C2202 /* NSObject+MBShorthand.h in Headers */ = {isa = PBXBuildFile; fileRef = C5FA233E18CA916C005C2202 /* NSObject+MBShorthand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5FA234818CA916C005C2202 /* NSObject+MBShorthand.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA233F18CA916C005C2202 /* NSObject+MBShorthand.m */; };
-		C5FA234918CA916C005C2202 /* NSObject+MBShorthand.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA233F18CA916C005C2202 /* NSObject+MBShorthand.m */; };
 		C5FA234A18CA916C005C2202 /* NSScanner+IMAPConversions.h in Headers */ = {isa = PBXBuildFile; fileRef = C5FA234018CA916C005C2202 /* NSScanner+IMAPConversions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5FA234B18CA916C005C2202 /* NSScanner+IMAPConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA234118CA916C005C2202 /* NSScanner+IMAPConversions.m */; };
-		C5FA234C18CA916C005C2202 /* NSScanner+IMAPConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA234118CA916C005C2202 /* NSScanner+IMAPConversions.m */; };
 		C5FA234D18CA916C005C2202 /* NSObject+TokenDispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = C5FA234218CA916C005C2202 /* NSObject+TokenDispatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5FA234E18CA916C005C2202 /* NSObject+TokenDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA234318CA916C005C2202 /* NSObject+TokenDispatch.m */; };
-		C5FA234F18CA916C005C2202 /* NSObject+TokenDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA234318CA916C005C2202 /* NSObject+TokenDispatch.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +56,8 @@
 		C500626F18AD348800371E5D /* MMPPluginMissing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPPluginMissing.m; sourceTree = "<group>"; };
 		C50062BE18AFDCBC00371E5D /* MMPAttributedStringBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPAttributedStringBase.h; sourceTree = "<group>"; };
 		C50062BF18AFDCBC00371E5D /* MMPAttributedStringBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPAttributedStringBase.m; sourceTree = "<group>"; };
+		C52507EB18D390A800A47E8F /* NSDate+IMAPConversions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+IMAPConversions.h"; sourceTree = "<group>"; };
+		C52507EC18D390A800A47E8F /* NSDate+IMAPConversions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+IMAPConversions.m"; sourceTree = "<group>"; };
 		C530E0CD18B19EFE00EF1E37 /* MMPMessageViewOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPMessageViewOptions.h; sourceTree = "<group>"; };
 		C530E0CE18B19EFE00EF1E37 /* MMPMessageViewOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPMessageViewOptions.m; sourceTree = "<group>"; };
 		C55081A818A1757600F4D77A /* MMPMimeProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPMimeProxy.h; sourceTree = "<group>"; };
@@ -250,6 +246,8 @@
 				C5FA234118CA916C005C2202 /* NSScanner+IMAPConversions.m */,
 				C5FA234218CA916C005C2202 /* NSObject+TokenDispatch.h */,
 				C5FA234318CA916C005C2202 /* NSObject+TokenDispatch.m */,
+				C52507EB18D390A800A47E8F /* NSDate+IMAPConversions.h */,
+				C52507EC18D390A800A47E8F /* NSDate+IMAPConversions.m */,
 			);
 			name = NSCategories;
 			sourceTree = "<group>";
@@ -273,6 +271,7 @@
 				C5FA234718CA916C005C2202 /* NSObject+MBShorthand.h in Headers */,
 				C5FA234418CA916C005C2202 /* NSString+IMAPConversions.h in Headers */,
 				C55081B218A178CB00F4D77A /* MMPBaseMimeView.h in Headers */,
+				C52507ED18D390A800A47E8F /* NSDate+IMAPConversions.h in Headers */,
 				C530E0CF18B19EFE00EF1E37 /* MMPMessageViewOptions.h in Headers */,
 				C55081AA18A1757600F4D77A /* MMPMimeProxy.h in Headers */,
 				C500627018AD348800371E5D /* MMPPluginMissing.h in Headers */,
@@ -386,6 +385,7 @@
 				C583065B18A6AA45006C279D /* MBMimeViewerPluginsManager.m in Sources */,
 				C578655518D24505007C03C6 /* SimpleRFC822GroupAddress.m in Sources */,
 				C500627118AD348800371E5D /* MMPPluginMissing.m in Sources */,
+				C52507EE18D390A800A47E8F /* NSDate+IMAPConversions.m in Sources */,
 				C5B8326318A2B46600A94197 /* MMPTextViewWithIntrinsic.m in Sources */,
 				C55081AB18A1757600F4D77A /* MMPMimeProxy.m in Sources */,
 				C5FA234818CA916C005C2202 /* NSObject+MBShorthand.m in Sources */,
@@ -398,15 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C578655618D24505007C03C6 /* SimpleRFC822GroupAddress.m in Sources */,
-				C5FA233818CA915D005C2202 /* SimpleRFC822Address.m in Sources */,
 				C5BB137D18A14B9D001B513E /* MoedaeMailPluginsBaseTests.m in Sources */,
-				C5FA233B18CA915D005C2202 /* MBoxProxy.m in Sources */,
-				C5FA234918CA916C005C2202 /* NSObject+MBShorthand.m in Sources */,
-				C55081AC18A1757600F4D77A /* MMPMimeProxy.m in Sources */,
-				C5FA234C18CA916C005C2202 /* NSScanner+IMAPConversions.m in Sources */,
-				C5FA234F18CA916C005C2202 /* NSObject+TokenDispatch.m in Sources */,
-				C5FA234618CA916C005C2202 /* NSString+IMAPConversions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

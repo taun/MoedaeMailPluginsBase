@@ -12,7 +12,8 @@
 /*!
  We are going to consider the email address fields to always be a group.
  "TO:" if the list of addresses is a RFC group, then it will have a name,
- otherwise, there will be no name and it is just a list of addresses.
+ otherwise, there will be no name and it is just a list of addresses. All 
+ address strings are assumed to be decommented.
  
  -------------------
  Groups RFC
@@ -58,9 +59,11 @@
 @property(nonatomic,strong) NSSet           *addresses;
 
 +(instancetype) newGroupNamed: (NSString *)name addresses:(NSSet *)list;
-+(instancetype) newGroupNamed: (NSString*)name fromString: (NSString*) aList;
+//+(instancetype) newGroupNamed: (NSString*)name fromString: (NSString*) aList;
++(instancetype) newGroupFromString: (NSString*) anRfcGroupString;
 
 /* designated initializer */
 -(instancetype) initWithName:(NSString *)name addresses:(NSSet *)list;
+-(instancetype) initWithGroupString: (NSString*) anRfcGroupString;
 
 @end

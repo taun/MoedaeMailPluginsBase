@@ -55,7 +55,16 @@
 #pragma mark - Single email tests
 - (void)testEmailAddress1 {
     NSString* emailString = @"john.q.public@example.com";
-    SimpleRFC822Address *newAddress = [emailString mdcSimpleRFC822Address];
+    SimpleRFC822Address *newAddress = [SimpleRFC822Address newAddressFromString: emailString];
+    SimpleRFC822Address *correctAddress = [SimpleRFC822Address newAddressName: @"" email: @"john.q.public@example.com"];
+    BOOL result = [correctAddress isEqual: newAddress];
+    
+    XCTAssertTrue(result, );
+}
+
+- (void)testEmailAddress4 {
+    NSString* emailString = @"<john.q.public@example.com>";
+    SimpleRFC822Address *newAddress = [SimpleRFC822Address newAddressFromString: emailString];
     SimpleRFC822Address *correctAddress = [SimpleRFC822Address newAddressName: @"" email: @"john.q.public@example.com"];
     BOOL result = [correctAddress isEqual: newAddress];
     
@@ -64,7 +73,7 @@
 
 - (void)testEmailAddress2 {
     NSString* emailString = @"\"Joe Q. Public\" <john.q.public@example.com>";
-    SimpleRFC822Address *newAddress = [emailString mdcSimpleRFC822Address];
+    SimpleRFC822Address *newAddress = [SimpleRFC822Address newAddressFromString: emailString];
     SimpleRFC822Address *correctAddress = [SimpleRFC822Address newAddressName: @"Joe Q. Public" email: @"john.q.public@example.com"];
     BOOL result = [correctAddress isEqual: newAddress];
     
@@ -73,7 +82,7 @@
 
 - (void)testEmailAddress3 {
     NSString* emailString = @"Joe Q. Public <john.q.public@example.com>";
-    SimpleRFC822Address *newAddress = [emailString mdcSimpleRFC822Address];
+    SimpleRFC822Address *newAddress = [SimpleRFC822Address newAddressFromString: emailString];
     SimpleRFC822Address *correctAddress = [SimpleRFC822Address newAddressName: @"Joe Q. Public" email: @"john.q.public@example.com"];
     BOOL result = [correctAddress isEqual: newAddress];
     
@@ -84,6 +93,90 @@
 
 #pragma mark - Single Group tests
 
+- (void)testEmailGroup1 {
+    NSString* emailString = @"A Group(Some people):Chris Jones <c@(Chris’s host.)public.example>, joe@example.org,John <jdoe@one.test> (my dear friend); (the end of the group)";
+    NSString *decommentedString = [emailString mdcStringByRemovingRFCComments];
+    SimpleRFC822GroupAddress *newGroup = [SimpleRFC822GroupAddress newGroupFromString: decommentedString];
+    
+    // Create the reference for testing
+    SimpleRFC822Address* address1 = [SimpleRFC822Address newAddressName: @"Chris Jones" email: @"c@public.example"];
+    SimpleRFC822Address* address2 = [SimpleRFC822Address newAddressName: nil email: @"joe@example.org"];
+    SimpleRFC822Address* address3 = [SimpleRFC822Address newAddressName: @"John" email: @"jdoe@one.test"];
+    NSSet* groupSet = [NSSet setWithObjects: address1, address2, address3, nil];
+    SimpleRFC822GroupAddress* subGroup = [SimpleRFC822GroupAddress newGroupNamed: @"A Group" addresses: groupSet];
+    SimpleRFC822GroupAddress* refGroup = [SimpleRFC822GroupAddress newGroupNamed: @"" addresses: [NSSet setWithObjects: subGroup, nil]];
+    
+    BOOL result = [newGroup isEqual: refGroup];
+    
+    XCTAssertTrue(result, );
+}
+- (void)testEmailGroup2 {
+    NSString* emailString = @"Pete(A nice \\) chap) <pete(his account)@silly.test(his host)>";
+    NSString *decommentedString = [emailString mdcStringByRemovingRFCComments];
+
+    SimpleRFC822GroupAddress *newGroup = [SimpleRFC822GroupAddress newGroupFromString: decommentedString];
+
+    // Create the reference for testing
+    SimpleRFC822Address* address1 = [SimpleRFC822Address newAddressName: @"Pete" email: @"pete@silly.test"];
+    NSSet* groupSet = [NSSet setWithObjects: address1, nil];
+
+    SimpleRFC822GroupAddress* refGroup = [SimpleRFC822GroupAddress newGroupNamed: @"" addresses: groupSet];
+    
+    BOOL result = [newGroup isEqual: refGroup];
+    
+    XCTAssertTrue(result, );
+}
+- (void)testEmailGroup3 {
+    NSString* emailString = @"Pete(A nice \\) chap) <pete(his account)@silly.test(his host)>,A Group(Some people):Chris Jones <c@(Chris’s host.)public.example>, joe@example.org,John <jdoe@one.test> (my dear friend); (the end of the group)";
+    NSString *decommentedString = [emailString mdcStringByRemovingRFCComments];
+    
+    SimpleRFC822GroupAddress *newGroup = [SimpleRFC822GroupAddress newGroupFromString: decommentedString];
+    
+    // Create the reference for testing
+    SimpleRFC822Address* address0 = [SimpleRFC822Address newAddressName: @"Pete" email: @"pete@silly.test"];
+    
+    SimpleRFC822Address* address1 = [SimpleRFC822Address newAddressName: @"Chris Jones" email: @"c@public.example"];
+    SimpleRFC822Address* address2 = [SimpleRFC822Address newAddressName: nil email: @"joe@example.org"];
+    SimpleRFC822Address* address3 = [SimpleRFC822Address newAddressName: @"John" email: @"jdoe@one.test"];
+    NSSet* groupSet = [NSSet setWithObjects: address1, address2, address3, nil];
+    SimpleRFC822GroupAddress* subGroup = [SimpleRFC822GroupAddress newGroupNamed: @"A Group" addresses: groupSet];
+    
+    SimpleRFC822GroupAddress* refGroup = [SimpleRFC822GroupAddress newGroupNamed: @"" addresses: [NSSet setWithObjects: address0, subGroup, nil]];
+    
+    BOOL result = [newGroup isEqual: refGroup];
+    
+    XCTAssertTrue(result, );
+}
+
+- (void)testEmailGroup4 {
+    NSString* emailString = @"(Empty list)(start)Hidden recipients  :(nobody(that I know))  ;";
+    NSString *decommentedString = [emailString mdcStringByRemovingRFCComments];
+    
+    SimpleRFC822GroupAddress *newGroup = [SimpleRFC822GroupAddress newGroupFromString: decommentedString];
+
+    SimpleRFC822GroupAddress* subGroup = [SimpleRFC822GroupAddress newGroupNamed: @"Hidden recipients" addresses: [NSSet new]];
+    
+    SimpleRFC822GroupAddress* refGroup = [SimpleRFC822GroupAddress newGroupNamed: @"" addresses: [NSSet setWithObjects: subGroup, nil]];
+    
+    BOOL result = [newGroup isEqual: refGroup];
+    
+    XCTAssertTrue(result, );
+}
+
+- (void)testEmailGroup5 {
+    NSString* emailString = @":;";
+    NSString *decommentedString = [emailString mdcStringByRemovingRFCComments];
+    
+    SimpleRFC822GroupAddress *newGroup = [SimpleRFC822GroupAddress newGroupFromString: decommentedString];
+
+    SimpleRFC822GroupAddress* subGroup = [SimpleRFC822GroupAddress newGroupNamed: nil addresses: [NSSet new]];
+    
+    SimpleRFC822GroupAddress* refGroup = [SimpleRFC822GroupAddress newGroupNamed: @"" addresses: [NSSet setWithObjects: subGroup, nil]];
+    
+    BOOL result = [newGroup isEqual: refGroup];
+    
+    XCTAssertTrue(result, );
+}
 #pragma mark - Embedded Group tests
 
 

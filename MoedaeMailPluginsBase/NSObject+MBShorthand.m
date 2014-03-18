@@ -24,8 +24,9 @@
 -(BOOL) isNonNilString {
     BOOL result = NO;
     if ([self isKindOfClass: [NSString class]]) {
-        if ([(NSString*)self length]>0) {
-            if (!([(NSString*)self caseInsensitiveCompare: @"NIL"] == NSOrderedSame)) {
+        NSString* shortest = [(NSString*)self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([shortest length]>0) {
+            if (!([shortest caseInsensitiveCompare: @"NIL"] == NSOrderedSame)) {
                 result = YES;
             }
         }

@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/*!
+ All address strings are assumed to be decommented.
+ */
 @interface SimpleRFC822Address : NSObject
 
 @property (strong) NSString* name;
@@ -26,8 +29,21 @@
 
 +(instancetype) newAddressName: (NSString*) name email: (NSString*) email;
 
+-(instancetype) initWithString: (NSString*)fullEmailString;
+/*!
+ Designated initializer
+ 
+ @param name  NSString address description
+ @param email NSString mail box @ domain
+ 
+ @return A SimpleRFC822Address
+ */
 -(instancetype) initWithName: (NSString*) name email: (NSString*) email;
-
+/*!
+ Convert the address back to a NSString.
+ 
+ @return a NSString always with <> around the mail box @ domain.
+ */
 -(NSString *) stringRFC822AddressFormat;
 
 @end
