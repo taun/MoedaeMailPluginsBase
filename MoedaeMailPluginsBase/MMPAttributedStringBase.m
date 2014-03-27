@@ -44,7 +44,7 @@
     
     //    [self setContentCompressionResistancePriority: NSLayoutPriorityFittingSizeCompression-1 forOrientation: NSLayoutConstraintOrientationVertical];
     //NSLayoutPriorityDefaultHigh
-    CGFloat borderWidth = 0.0;
+    CGFloat borderWidth = 2.0;
     [nodeView setWantsLayer: YES];
     CALayer* rawLayer = nodeView.layer;
     [rawLayer setBorderWidth: borderWidth];
@@ -58,7 +58,7 @@
     self.mimeView = nodeView;
     
     NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver: self.mimeView selector: @selector(viewFrameChanged:) name: NSViewFrameDidChangeNotification object: self.mimeView];
+    [nc addObserver: self.mimeView selector: @selector(viewFrameChanged:) name: NSViewFrameDidChangeNotification object: self.superview];
     
     [self loadData];
     

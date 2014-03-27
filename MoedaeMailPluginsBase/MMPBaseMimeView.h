@@ -50,6 +50,7 @@
 @property (nonatomic,strong) MMPMimeProxy           *node;
 @property (nonatomic,strong) MMPMessageViewOptions  *options;
 @property (nonatomic,strong) NSView                 *mimeView;
+@property (nonatomic,assign) BOOL                   loadingDidFinish;
 
 /*
  content := "Content-Type" ":" type "/" subtype *(";" parameter) ; Matching of media type and subtype is ALWAYS case-insensitive.

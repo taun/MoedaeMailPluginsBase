@@ -43,6 +43,7 @@
         // Initialization code here.
         [self setOptions: options];
         [self setNode: node];
+        self.loadingDidFinish = NO;
     }
     return self;
 }
@@ -71,46 +72,47 @@
     
     if (self.mimeView) {
         NSView* nodeView = self.mimeView;
+        CGFloat margin = 4.0;
         
         [self addConstraints:@[
-                               [NSLayoutConstraint constraintWithItem: nodeView
-                                                            attribute:NSLayoutAttributeTop
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self
-                                                            attribute:NSLayoutAttributeTop
-                                                           multiplier:1.0
-                                                             constant: 4],
+                               [NSLayoutConstraint constraintWithItem: self
+                                                            attribute: NSLayoutAttributeTop
+                                                            relatedBy: NSLayoutRelationEqual
+                                                               toItem: nodeView
+                                                            attribute: NSLayoutAttributeTop
+                                                           multiplier: 1.0
+                                                             constant: -margin],
                                
-                               [NSLayoutConstraint constraintWithItem: nodeView
-                                                            attribute:NSLayoutAttributeLeft
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self
-                                                            attribute:NSLayoutAttributeLeft
-                                                           multiplier:1.0
-                                                             constant: 4],
+                               [NSLayoutConstraint constraintWithItem: self
+                                                            attribute: NSLayoutAttributeLeft
+                                                            relatedBy: NSLayoutRelationEqual
+                                                               toItem: nodeView
+                                                            attribute: NSLayoutAttributeLeft
+                                                           multiplier: 1.0
+                                                             constant: -margin],
                                
-                               [NSLayoutConstraint constraintWithItem: nodeView
-                                                            attribute:NSLayoutAttributeBottom
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self
-                                                            attribute:NSLayoutAttributeBottom
-                                                           multiplier:1.0
-                                                             constant: -4],
+                               [NSLayoutConstraint constraintWithItem: self
+                                                            attribute: NSLayoutAttributeBottom
+                                                            relatedBy: NSLayoutRelationEqual
+                                                               toItem: nodeView
+                                                            attribute: NSLayoutAttributeBottom
+                                                           multiplier: 1.0
+                                                             constant: 2*margin],
                                
-                               [NSLayoutConstraint constraintWithItem: nodeView
-                                                            attribute:NSLayoutAttributeRight
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self
-                                                            attribute:NSLayoutAttributeRight
-                                                           multiplier:1.0
-                                                             constant: -4],
+                               [NSLayoutConstraint constraintWithItem: self
+                                                            attribute: NSLayoutAttributeRight
+                                                            relatedBy: NSLayoutRelationEqual
+                                                               toItem: nodeView
+                                                            attribute: NSLayoutAttributeRight
+                                                           multiplier: 1.0
+                                                             constant: margin],
                                
                                ]];
         
-        [nodeView setContentHuggingPriority: 250 forOrientation: NSLayoutConstraintOrientationHorizontal];
+        [nodeView setContentHuggingPriority: 1000 forOrientation: NSLayoutConstraintOrientationHorizontal];
         [nodeView setContentHuggingPriority: 750 forOrientation: NSLayoutConstraintOrientationVertical];
         
-        [nodeView setContentCompressionResistancePriority: 250 forOrientation: NSLayoutConstraintOrientationHorizontal];
+        [nodeView setContentCompressionResistancePriority: 750 forOrientation: NSLayoutConstraintOrientationHorizontal];
         [nodeView setContentCompressionResistancePriority: 1000 forOrientation: NSLayoutConstraintOrientationVertical];
         
     }
