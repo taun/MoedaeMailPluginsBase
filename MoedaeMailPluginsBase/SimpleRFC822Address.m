@@ -218,7 +218,8 @@ static NSRegularExpression *regexRfcComments;
         NSString* trimmedAddressString = [noSingleQuote stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
         if ([trimmedAddressString isNonNilString]) {
-            NSArray* addressesArray = [trimmedAddressString componentsSeparatedByString: @","];
+            // find tokens separated by non-quoted commas.
+            NSArray* addressesArray = [trimmedAddressString mdcArrayFromCommaSeparatedTokens];
             
             //            NSMutableArray* fixedAddressesArray = [NSMutableArray new];
             //            for (NSString* address in addressesArray) {

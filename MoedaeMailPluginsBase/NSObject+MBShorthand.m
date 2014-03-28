@@ -26,7 +26,7 @@
     if ([self isKindOfClass: [NSString class]]) {
         NSString* shortest = [(NSString*)self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if ([shortest length]>0) {
-            if (!([shortest caseInsensitiveCompare: @"NIL"] == NSOrderedSame)) {
+            if (!([shortest caseInsensitiveCompare: @"NIL"] == NSOrderedSame) || !([shortest caseInsensitiveCompare: @"(null)"] == NSOrderedSame)) {
                 result = YES;
             }
         }

@@ -157,7 +157,7 @@
     NSString* ppreviousChar = nil;
     NSInteger commentLevel = 0;
     
-    for (int i=0; i < self.length; i++) {
+    for (NSUInteger i=0; i < self.length; i++) {
         //
         NSString* currentChar = [self substringWithRange: NSMakeRange(i, 1)];
         
@@ -177,6 +177,35 @@
     }
     return [decommentedString copy];
 }
+
+-(NSArray*) mdcArrayFromCommaSeparatedTokens {
+    
+    NSMutableArray *emailTokens = [[NSMutableArray alloc] initWithCapacity: 4];
+    NSString* currentToken;
+    
+    NSUInteger tokenStart = 0;
+
+    BOOL inName = NO;
+    
+    for (NSUInteger i=0; i < self.length; i++) {
+        //
+        NSString* currentChar = [self substringWithRange: NSMakeRange(i, 1)];
+        
+        if ([currentChar isEqualToString: @"\""]) {
+            inName = !inName;
+        } else if (!inName && [currentChar isEqualToString: @","]) {
+            currentToken = [self substringWithRange: NSMakeRange(tokenStart, i-tokenStart)];
+            tokenStart = i+1;
+            [emailTokens addObject: currentToken];
+        }
+    }
+    if (self.length > tokenStart) {
+        currentToken = [self substringWithRange: NSMakeRange(tokenStart, self.length - tokenStart)];
+        [emailTokens addObject: currentToken];
+    }
+    return [emailTokens copy];
+}
+
 
 -(NSString*) mdcStringFromQEncodedAsciiHexInCharset: (int) encodingCharset {
     // Change to use NSScanner

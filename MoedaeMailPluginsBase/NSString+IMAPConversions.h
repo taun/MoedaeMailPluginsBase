@@ -42,6 +42,14 @@
 
 -(NSString*) mdcStringDeQuotedPrintableFromCharset: (int) encodingCharset;
 
+/*!
+ Transforms a comma separated list of tokens such as email addresses and returns an array.
+ This is different from the standard [NSString componentsSeparatedByString:] in that it ignores
+ commas within quoted strings segments.
+ 
+ @return an NSArray of individual email address token strings.
+ */
+-(NSArray*) mdcArrayFromCommaSeparatedTokens;
 
 /*!
  A string with hex octet encoding of the form "=XX" and returns a string
