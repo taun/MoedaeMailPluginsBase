@@ -25,6 +25,8 @@
     normalized = [normalized stringByReplacingOccurrencesOfString: @"." withString: @""];
     normalized = [normalized stringByReplacingOccurrencesOfString: @"[" withString: @""];
     normalized = [normalized stringByReplacingOccurrencesOfString: @"]" withString: @""];
+    normalized = [normalized stringByReplacingOccurrencesOfString: @"/" withString: @""];
+    normalized = [normalized stringByReplacingOccurrencesOfString: @"\\" withString: @""];
     return normalized;
 }
 
