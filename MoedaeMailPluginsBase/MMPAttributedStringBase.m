@@ -44,11 +44,11 @@
     
     //    [self setContentCompressionResistancePriority: NSLayoutPriorityFittingSizeCompression-1 forOrientation: NSLayoutConstraintOrientationVertical];
     //NSLayoutPriorityDefaultHigh
-    CGFloat borderWidth = 2.0;
+    CGFloat borderWidth = 0.0;
     [nodeView setWantsLayer: YES];
     CALayer* rawLayer = nodeView.layer;
     [rawLayer setBorderWidth: borderWidth];
-    [rawLayer setBorderColor: [[NSColor blueColor] CGColor]];
+    [rawLayer setBorderColor: [[NSColor lightGrayColor] CGColor]];
     
     
     CALayer* myLayer = self.layer;
