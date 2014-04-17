@@ -157,6 +157,7 @@
 		C5BB136118A14B9D001B513E /* MoedaeMailPlugins */ = {
 			isa = PBXGroup;
 			children = (
+				C5FA233118CA913C005C2202 /* NSCategories */,
 				C5FA233018CA911F005C2202 /* UtilityClasses */,
 				C5FA232F18CA90E6005C2202 /* PluginSuperClasses */,
 				C5BB136218A14B9D001B513E /* Supporting Files */,
@@ -221,7 +222,6 @@
 			children = (
 				C5FA233418CA915D005C2202 /* MBoxProxy.h */,
 				C5FA233518CA915D005C2202 /* MBoxProxy.m */,
-				C5FA233118CA913C005C2202 /* NSCategories */,
 				C5FA233218CA915D005C2202 /* SimpleRFC822Address.h */,
 				C5FA233318CA915D005C2202 /* SimpleRFC822Address.m */,
 			);
