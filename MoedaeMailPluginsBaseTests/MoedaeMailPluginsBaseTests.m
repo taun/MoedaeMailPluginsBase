@@ -322,5 +322,47 @@
 
 #pragma mark - Embedded Group tests
 
-
+- (void) testCompressWhitespace1 {
+    NSString* stringWithWhitespace = @"Hi Taun,\n\
+    \n\
+    \n\
+    \n\
+    Dorothy Parshall invited you to like Friends Committee on National =\n\
+    \n\
+    Legislation.\n\
+    \n\
+    \n\
+    \n\
+    If you like Friends Committee on National Legislation follow the link =\n\
+    \n\
+below:\n\
+    \n\
+https://www.facebook.com/n/?pages%2Fx%2Fadd_fan%2F&id=3D121721071090&ori=\n\
+    \n\
+    =3Dpage_invite&ext=3D1399643458&hash=3DAeRUgPtcxhxqd8GL&aref=3D96131958&me=\n\
+    \n\
+    dium=3Demail&mid=3D9af4d70G60bba639G5badb76G4cGb509&bcode=3D1.1397051458.A=\n\
+    \n\
+    bm6rlw3Ckv03zUz&n_m=3Dtaun%40charcoalia.net\n\
+    \n\
+    \n\
+    \n\
+    To view Friends Committee on National Legislation follow the link below:\n\
+    \n\
+https://www.facebook.com/quakerlobby\n\
+    \n\
+    \n\
+    \n\
+    Thanks,\n\
+    \n\
+    The Facebook Team\n\
+";
+    
+    NSString* compressed = [stringWithWhitespace mdcCompressWitespace];
+    NSString* refString = @"Hi Taun, Dorothy Parshall invited you to like Friends Committee on National = Legislation. If you like Friends Committee on National Legislation follow the link = below: https://www.facebook.com/n/?pages%2Fx%2Fadd_fan%2F&id=3D121721071090&ori= =3Dpage_invite&ext=3D1399643458&hash=3DAeRUgPtcxhxqd8GL&aref=3D96131958&me= dium=3Demail&mid=3D9af4d70G60bba639G5badb76G4cGb509&bcode=3D1.1397051458.A= bm6rlw3Ckv03zUz&n_m=3Dtaun%40charcoalia.net To view Friends Committee on National Legislation follow the link below: https://www.facebook.com/quakerlobby Thanks, The Facebook Team";
+    
+    BOOL result = [compressed isEqualToString: refString];
+    
+    XCTAssertTrue(result, );
+}
 @end
