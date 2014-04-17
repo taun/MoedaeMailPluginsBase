@@ -67,4 +67,12 @@
  */
 -(NSNumber*) mdcNumberFromIANACharset;
 
+/*!
+ Remove excess whitespace to show as much text as possible in as little space as possible.
+ Remove line breaks, replace consecutive whitespace with one space.
+ 
+ @return string with excess whitespace removed.
+ */
+-(NSString*) mdcCompressWitespace;
+
 @end

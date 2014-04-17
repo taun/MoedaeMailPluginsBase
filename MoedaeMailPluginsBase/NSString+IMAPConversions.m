@@ -386,16 +386,6 @@
     return dequotedPrintable;
 }
 
-
-
-
-
-
-
-
-
-
-
 -(NSNumber*) mdcNumberFromIANACharset {
     NSNumber* nsDomainCharset;
     
@@ -459,6 +449,19 @@
     }
     
     return nsDomainCharset;
+}
+
+-(NSString*) mdcCompressWitespace {
+    NSString* result;
+    
+    
+    NSCharacterSet *whitespaces = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSPredicate *noEmptyStrings = [NSPredicate predicateWithFormat:@"SELF != ''"];
+    
+    NSArray *parts = [self componentsSeparatedByCharactersInSet: whitespaces];
+    NSArray *filteredArray = [parts filteredArrayUsingPredicate: noEmptyStrings];
+    result = [filteredArray componentsJoinedByString:@" "];
+    return result;
 }
 
 @end
