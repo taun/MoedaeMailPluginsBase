@@ -15,7 +15,7 @@ extern NSString * const MBPasteboardTypeMbox;
 @property (nonatomic,strong) NSString       *name;
 @property (nonatomic,strong) NSString       *desc;
 @property (nonatomic,strong) NSString       *fullPath;
-@property (nonatomic,strong) NSString       *uid;
+@property (nonatomic,strong) NSNumber       *uid;
 @property (nonatomic,strong) NSURL          *objectURL;
 @property (nonatomic,strong) NSString       *accountIdentifier;
 
