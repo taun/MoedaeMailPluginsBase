@@ -361,7 +361,7 @@
      return [decodedMutableString copy];
 }
 
--(NSString*) mdcStringDeQuotedPrintableFromCharset: (int) encodingCharset {
+-(NSString*) mdcStringDeQuotedPrintableFromCharset: (NSStringEncoding) encodingCharset {
     NSString* dequotedPrintable;
     
     

@@ -22,7 +22,7 @@
  */
 -(NSString*) mdcStringAsSelectorSafeCamelCase;
 
--(NSString*) mdcStringFromBase64WithCharset: (int) encodingCharset;
+-(NSString*) mdcStringFromBase64WithCharset: (NSStringEncoding) encodingCharset;
 
 
 /*!
@@ -40,7 +40,7 @@
 
 -(NSString*) mdcStringByRemovingRFCComments;
 
--(NSString*) mdcStringDeQuotedPrintableFromCharset: (int) encodingCharset;
+-(NSString*) mdcStringDeQuotedPrintableFromCharset: (NSStringEncoding) encodingCharset;
 
 /*!
  Transforms a comma separated list of tokens such as email addresses and returns an array.
@@ -57,7 +57,7 @@
  
  @return a decoded NSString
  */
--(NSString*) mdcStringFromQEncodedAsciiHexInCharset: (int) encodingCharset;
+-(NSString*) mdcStringFromQEncodedAsciiHexInCharset: (NSStringEncoding) encodingCharset;
 
 /*!
  Transforms from IANA charset strings representing a character set to an NSNumber representing an NS domain character set.
