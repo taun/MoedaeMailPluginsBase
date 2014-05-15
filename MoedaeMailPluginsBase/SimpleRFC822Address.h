@@ -93,6 +93,8 @@
 
 +(instancetype) newAddressName: (NSString*) name email: (NSString*) email;
 
++(instancetype) newAddressName: (NSString*) name mailbox: (NSString*) box domain: (NSString*) domain;
+
 +(instancetype) newAddressesGroupNamed: (NSString *)name addresses:(NSSet *)list;
 
 -(instancetype) initWithString: (NSString*)fullEmailString;
@@ -105,6 +107,16 @@
  @return A SimpleRFC822Address
  */
 -(instancetype) initWithName:(NSString *)name email:(NSString *)email;
+/*!
+ Designated initializer
+ 
+ @param name  NSString address description
+ @param box
+ @param domain
+ 
+ @return A SimpleRFC822Address
+ */
+-(instancetype) initWithName:(NSString *)name mailbox:(NSString *)box domain: (NSString*) domain;
 //-(instancetype) initWithName: (NSString*) name email: (NSString*) email;
 
 /* designated initializer */

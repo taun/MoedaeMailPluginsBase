@@ -22,7 +22,8 @@ static NSRegularExpression *regexRfcComments;
 @implementation SimpleRFC822Address
 
 /*!
- 
+ NOTE: address = mailbox / group
+    Meaning I did not need to allow for embedded groups, it is either or not both. The parsing handles both in an address list.
  Sample group list text from RFC
  "A Group(Some people):Chris Jones <c@(Chris’s host.)public.example>, joe@example.org,John <jdoe@one.test> (my dear friend); (the end of the group)"
  "Pete(A nice \) chap) <pete(his account)@silly.test(his host)>"
@@ -88,6 +89,9 @@ static NSRegularExpression *regexRfcComments;
 +(instancetype) newAddressName:(NSString *)name email:(NSString *)email {
     return [[SimpleRFC822Address alloc] initWithName:name email:email];
 }
++(instancetype) newAddressName:(NSString *)name mailbox:(NSString *)box domain:(NSString *)domain {
+    return [[SimpleRFC822Address alloc] initWithName:name mailbox: box domain: domain];
+}
 +(instancetype) newAddressesGroupNamed: (NSString *)name addresses:(NSSet *)list {
     SimpleRFC822Address* newGroupAddress = [[[self class] alloc] initWithName: name email: nil];
     newGroupAddress.addresses = list;
@@ -150,60 +154,65 @@ static NSRegularExpression *regexRfcComments;
  */
 -(instancetype) initWithString:(NSString *)anRfcGroupString {
     NSString* decommentedString = [anRfcGroupString mdcStringByRemovingRFCComments];
-
     
-    NSMutableSet* tempAddresses = [NSMutableSet new];
-    NSString* tempName = @"";  // always empty for top level group
+    SimpleRFC822Address* newAddress;
     
-    
-    NSMutableString* topLevelAddresses = [decommentedString mutableCopy];
-    
-    NSArray* matches;
-    matches = [regexGroupEmails matchesInString: topLevelAddresses options: 0 range: NSMakeRange(0, topLevelAddresses.length)];
-    
-    NSUInteger offset = 0; // offset compensation as groups are removed from topLevelAddresses string
-    
-    for (NSTextCheckingResult* tcr in matches) {
-        // If no matches, no group just addresses to parse into an array
-        // one match per group
-        // 1st range is full group with name
-        // 2nd range is group name, length == 0 if empty
-        // 3rd range is group addresses, length == 0 if empty
-        // trim strings and check length before assigning, make isNonNil trim?
+    if ([[decommentedString stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]] isNonNilString]) {
         
-        // Remove groups from topLevelAddresses
-        // add group to address set
+        NSMutableSet* tempAddresses = [NSMutableSet new];
+        NSString* tempName = @"";  // always empty for top level group
         
-        NSTextCheckingResult* offsetTcr = [tcr resultByAdjustingRangesWithOffset: -offset];
-        if ([offsetTcr numberOfRanges]==3) {
-            // good
-            NSRange groupFullRange = (NSRange)[offsetTcr rangeAtIndex:0];
-            NSRange groupNameRange = (NSRange)[offsetTcr rangeAtIndex:1];
-            NSRange groupListRange = (NSRange)[offsetTcr rangeAtIndex:2];
+        
+        NSMutableString* topLevelAddresses = [decommentedString mutableCopy];
+        
+        NSArray* matches;
+        matches = [regexGroupEmails matchesInString: topLevelAddresses options: 0 range: NSMakeRange(0, topLevelAddresses.length)];
+        
+        NSUInteger offset = 0; // offset compensation as groups are removed from topLevelAddresses string
+        
+        for (NSTextCheckingResult* tcr in matches) {
+            // If no matches, no group just addresses to parse into an array
+            // one match per group
+            // 1st range is full group with name
+            // 2nd range is group name, length == 0 if empty
+            // 3rd range is group addresses, length == 0 if empty
+            // trim strings and check length before assigning, make isNonNil trim?
             
-            NSString* groupName = [[topLevelAddresses substringWithRange: groupNameRange] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]]; // may be empty
-            NSString* groupList = [topLevelAddresses substringWithRange: groupListRange];
-            NSSet* groupSet = [self addressesToSetForString: groupList];
+            // Remove groups from topLevelAddresses
+            // add group to address set
             
-            SimpleRFC822Address* newGroup = [SimpleRFC822Address newAddressesGroupNamed: groupName addresses: groupSet];
-            
-            if (newGroup) {
-                [tempAddresses addObject: newGroup];
-                [topLevelAddresses deleteCharactersInRange: groupFullRange];
-                offset += groupFullRange.length;
+            NSTextCheckingResult* offsetTcr = [tcr resultByAdjustingRangesWithOffset: -offset];
+            if ([offsetTcr numberOfRanges]==3) {
+                // good
+                NSRange groupFullRange = (NSRange)[offsetTcr rangeAtIndex:0];
+                NSRange groupNameRange = (NSRange)[offsetTcr rangeAtIndex:1];
+                NSRange groupListRange = (NSRange)[offsetTcr rangeAtIndex:2];
+                
+                NSString* groupName = [[topLevelAddresses substringWithRange: groupNameRange] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]]; // may be empty
+                NSString* groupList = [topLevelAddresses substringWithRange: groupListRange];
+                NSSet* groupSet = [self addressesToSetForString: groupList];
+                
+                SimpleRFC822Address* newGroup = [SimpleRFC822Address newAddressesGroupNamed: groupName addresses: groupSet];
+                
+                if (newGroup) {
+                    [tempAddresses addObject: newGroup];
+                    [topLevelAddresses deleteCharactersInRange: groupFullRange];
+                    offset += groupFullRange.length;
+                } else {
+                    // leave group in place if conversion fails for some reason.
+                }
+                
             } else {
-                // leave group in place if conversion fails for some reason.
+                NSLog(@"%@,%@ Error - Should have 3 capture ranges. Only have: %lu",NSStringFromClass([self class]), NSStringFromSelector(_cmd),[offsetTcr numberOfRanges]);
             }
-            
-        } else {
-            NSLog(@"%@,%@ Error - Should have 3 capture ranges. Only have: %lu",NSStringFromClass([self class]), NSStringFromSelector(_cmd),[offsetTcr numberOfRanges]);
         }
+        
+        // Turn topLevelAddresses into set
+        [tempAddresses unionSet: [self addressesToSetForString: topLevelAddresses]];
+        
+        newAddress = [SimpleRFC822Address newAddressesGroupNamed: tempName addresses: tempAddresses];
+        
     }
-    
-    // Turn topLevelAddresses into set
-    [tempAddresses unionSet: [self addressesToSetForString: topLevelAddresses]];
-    
-    SimpleRFC822Address* newAddress = [SimpleRFC822Address newAddressesGroupNamed: tempName addresses: tempAddresses];
     
     return newAddress;
 }
@@ -244,21 +253,31 @@ static NSRegularExpression *regexRfcComments;
     return [addresses copy];
 }
 
-/* designated initializer */
 -(instancetype) initWithName:(NSString *)name email:(NSString *)email{
+    self = [self initWithName: name mailbox: nil domain: nil];
+    
+    if (self) {
+        [self setEmail: email];
+     }
+    
+    return self;
+}
+/* designated initializer */
+-(instancetype) initWithName:(NSString *)name mailbox:(NSString *)box domain:(NSString *)domain {
     self = [super init];
     
     if (self) {
         [self setName: name];
-        [self setEmail: email];
+        [self setMailbox: box];
+        [self setDomain: domain];
         _isLeaf = YES;
-     }
+    }
     
     return self;
 }
 
 -(id) init {
-    self = [self initWithName: nil email: nil];
+    self = [self initWithName: nil mailbox: nil domain: nil];
     
     return self;
 }
@@ -320,7 +339,7 @@ static NSRegularExpression *regexRfcComments;
 -(NSString*) stringRFC822LeafAddressFormat {
     NSString *rfc822Email = nil;
     if (self.name.length != 0) {
-        rfc822Email = [NSString stringWithFormat: @"%@ <%@>", self.name, self.email];
+        rfc822Email = [NSString stringWithFormat: @"\"%@\" <%@>", self.name, self.email];
     } else {
         rfc822Email = [NSString stringWithFormat: @"<%@>", self.email];
     }
