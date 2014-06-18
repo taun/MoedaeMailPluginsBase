@@ -37,6 +37,9 @@
 		C5BB137B18A14B9D001B513E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5BB137918A14B9D001B513E /* InfoPlist.strings */; };
 		C5BB137D18A14B9D001B513E /* MoedaeMailPluginsBaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BB137C18A14B9D001B513E /* MoedaeMailPluginsBaseTests.m */; };
 		C5CF258518D2903900CEEC6A /* MoedaeMailPlugins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5BB135818A14B9D001B513E /* MoedaeMailPlugins.framework */; };
+		C5DB12FF192E48BF0010700C /* MMPMessageProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = C5DB12FD192E48BF0010700C /* MMPMessageProxy.h */; };
+		C5DB1300192E48C00010700C /* MMPMessageProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DB12FE192E48BF0010700C /* MMPMessageProxy.m */; };
+		C5DB1301192E48C00010700C /* MMPMessageProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C5DB12FE192E48BF0010700C /* MMPMessageProxy.m */; };
 		C5EA23C819105C7500D675F8 /* MoedaeMailPluginsNSCatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5EA23C719105C7500D675F8 /* MoedaeMailPluginsNSCatTests.m */; };
 		C5FA233618CA915D005C2202 /* SimpleRFC822Address.h in Headers */ = {isa = PBXBuildFile; fileRef = C5FA233218CA915D005C2202 /* SimpleRFC822Address.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5FA233718CA915D005C2202 /* SimpleRFC822Address.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FA233318CA915D005C2202 /* SimpleRFC822Address.m */; };
@@ -85,6 +88,8 @@
 		C5BB137818A14B9D001B513E /* MoedaeMailPluginsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MoedaeMailPluginsTests-Info.plist"; sourceTree = "<group>"; };
 		C5BB137A18A14B9D001B513E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C5BB137C18A14B9D001B513E /* MoedaeMailPluginsBaseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoedaeMailPluginsBaseTests.m; sourceTree = "<group>"; };
+		C5DB12FD192E48BF0010700C /* MMPMessageProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPMessageProxy.h; sourceTree = "<group>"; };
+		C5DB12FE192E48BF0010700C /* MMPMessageProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPMessageProxy.m; sourceTree = "<group>"; };
 		C5EA23C719105C7500D675F8 /* MoedaeMailPluginsNSCatTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoedaeMailPluginsNSCatTests.m; sourceTree = "<group>"; };
 		C5FA233218CA915D005C2202 /* SimpleRFC822Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleRFC822Address.h; sourceTree = "<group>"; };
 		C5FA233318CA915D005C2202 /* SimpleRFC822Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleRFC822Address.m; sourceTree = "<group>"; };
@@ -171,8 +176,6 @@
 				C583065C18A6AD32006C279D /* MoedaeMailPlugins.h */,
 				C583065818A6AA45006C279D /* MBMimeViewerPluginsManager.h */,
 				C583065918A6AA45006C279D /* MBMimeViewerPluginsManager.m */,
-				C55081A818A1757600F4D77A /* MMPMimeProxy.h */,
-				C55081A918A1757600F4D77A /* MMPMimeProxy.m */,
 			);
 			name = MoedaeMailPlugins;
 			path = MoedaeMailPluginsBase;
@@ -232,6 +235,10 @@
 				C5FA233518CA915D005C2202 /* MBoxProxy.m */,
 				C5FA233218CA915D005C2202 /* SimpleRFC822Address.h */,
 				C5FA233318CA915D005C2202 /* SimpleRFC822Address.m */,
+				C55081A818A1757600F4D77A /* MMPMimeProxy.h */,
+				C55081A918A1757600F4D77A /* MMPMimeProxy.m */,
+				C5DB12FD192E48BF0010700C /* MMPMessageProxy.h */,
+				C5DB12FE192E48BF0010700C /* MMPMessageProxy.m */,
 			);
 			name = UtilityClasses;
 			sourceTree = "<group>";
@@ -271,6 +278,7 @@
 				C5FA233918CA915D005C2202 /* MBoxProxy.h in Headers */,
 				C5FA234D18CA916C005C2202 /* NSObject+TokenDispatch.h in Headers */,
 				C5FA234718CA916C005C2202 /* NSObject+MBShorthand.h in Headers */,
+				C5DB12FF192E48BF0010700C /* MMPMessageProxy.h in Headers */,
 				C5FA234418CA916C005C2202 /* NSString+IMAPConversions.h in Headers */,
 				C555720519101702006E4B64 /* NSArray+IMAPConversions.h in Headers */,
 				C55081B218A178CB00F4D77A /* MMPBaseMimeView.h in Headers */,
@@ -391,6 +399,7 @@
 				C55081AB18A1757600F4D77A /* MMPMimeProxy.m in Sources */,
 				C555720619101702006E4B64 /* NSArray+IMAPConversions.m in Sources */,
 				C5FA234818CA916C005C2202 /* NSObject+MBShorthand.m in Sources */,
+				C5DB1300192E48C00010700C /* MMPMessageProxy.m in Sources */,
 				C5FA234518CA916C005C2202 /* NSString+IMAPConversions.m in Sources */,
 				C5FA233718CA915D005C2202 /* SimpleRFC822Address.m in Sources */,
 			);
@@ -401,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5EA23C819105C7500D675F8 /* MoedaeMailPluginsNSCatTests.m in Sources */,
+				C5DB1301192E48C00010700C /* MMPMessageProxy.m in Sources */,
 				C5BB137D18A14B9D001B513E /* MoedaeMailPluginsBaseTests.m in Sources */,
 				C555720719101702006E4B64 /* NSArray+IMAPConversions.m in Sources */,
 			);

@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SimpleRFC822Address.h"
+#import <CoreData/CoreData.h>
 
 /*!
  Proxy Class for Message Mime Content to be passed to viewers.
@@ -15,31 +17,40 @@
  */
 @interface MMPMimeProxy : NSObject
 
-@property (nonatomic, retain) NSString * bodyIndex;
-@property (nonatomic, retain) NSString * charset;
-@property (nonatomic, retain) NSString * desc;
-@property (nonatomic, retain) NSString * encoding;
-@property (nonatomic, retain) NSString * extensions;
-@property (nonatomic, retain) NSString * filename;
-@property (nonatomic, retain) NSString * id;
-@property (nonatomic, retain) NSNumber * isAttachment;
-@property (nonatomic, retain) NSNumber * isInline;
-@property (nonatomic, retain) NSNumber * isLeaf;
-@property (nonatomic, retain) NSString * language;
-@property (nonatomic, retain) NSNumber * lines;
-@property (nonatomic, retain) NSString * location;
-@property (nonatomic, retain) NSString * md5;
-@property (nonatomic, retain) NSString * mime;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * octets;
-@property (nonatomic, retain) NSString * subtype;
-@property (nonatomic, retain) NSString * type;
-@property (nonatomic, retain) NSNumber * subPartNumber;
-@property (nonatomic, retain) NSOrderedSet *childNodes;
-@property (nonatomic, retain) NSSet *parameters;
-@property (nonatomic, retain) NSData * decoded;
-@property (nonatomic, retain) NSString * encoded;
-@property (nonatomic, retain) NSNumber * isDecoded;
+@property (nonatomic, strong) NSManagedObjectID * objectID;
+@property (nonatomic, strong) NSString * bodyIndex;
+@property (nonatomic, strong) NSString * charset;
+@property (nonatomic, strong) NSString * desc;
+@property (nonatomic, strong) NSString * encoding;
+@property (nonatomic, strong) NSString * extensions;
+@property (nonatomic, strong) NSString * filename;
+@property (nonatomic, strong) NSString * id;
+@property (nonatomic, strong) NSNumber * isAttachment;
+@property (nonatomic, strong) NSNumber * isInline;
+@property (nonatomic, strong) NSNumber * isLeaf;
+@property (nonatomic, strong) NSString * language;
+@property (nonatomic, strong) NSNumber * lines;
+@property (nonatomic, strong) NSString * location;
+@property (nonatomic, strong) NSString * md5;
+@property (nonatomic, strong) NSString * mime;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSNumber * octets;
+@property (nonatomic, strong) NSString * subtype;
+@property (nonatomic, strong) NSString * type;
+@property (nonatomic, strong) NSNumber * subPartNumber;
+@property (nonatomic, strong) NSOrderedSet *childNodes;
+@property (nonatomic, strong) NSSet *parameters;
+@property (nonatomic, strong) NSData * decoded;
+@property (nonatomic, strong) NSString * encoded;
+@property (nonatomic, strong) NSNumber * isDecoded;
+
+@property (nonatomic, retain) NSString * subject;
+@property (nonatomic, retain) SimpleRFC822Address *addressesBcc;
+@property (nonatomic, retain) SimpleRFC822Address *addressesCc;
+@property (nonatomic, retain) SimpleRFC822Address *addressesTo;
+@property (nonatomic, retain) SimpleRFC822Address *addressFrom;
+@property (nonatomic, retain) SimpleRFC822Address *addressReplyTo;
+@property (nonatomic, retain) SimpleRFC822Address *addressSender;
 
 
 @end

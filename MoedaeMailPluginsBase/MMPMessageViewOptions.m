@@ -10,4 +10,14 @@
 
 @implementation MMPMessageViewOptions
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _showViewOutlines = NO;
+        _verticalHuggingPriority = 750.0;
+        
+    }
+    return self;
+}
 @end

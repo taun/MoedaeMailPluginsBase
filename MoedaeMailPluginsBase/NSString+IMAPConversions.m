@@ -30,7 +30,7 @@
     return normalized;
 }
 
--(NSString*) mdcStringFromBase64WithCharset: (int) encodingCharset {
+-(NSString*) mdcStringFromBase64WithCharset: (NSStringEncoding) encodingCharset {
     
     NSData* decodedData = [[NSData alloc] initWithBase64EncodedString: self options: NSDataBase64DecodingIgnoreUnknownCharacters];
     NSString* decodedString = [[NSString alloc] initWithData: decodedData encoding: encodingCharset];
@@ -209,7 +209,7 @@
 }
 
 
--(NSString*) mdcStringFromQEncodedAsciiHexInCharset: (int) encodingCharset {
+-(NSString*) mdcStringFromQEncodedAsciiHexInCharset: (NSStringEncoding) encodingCharset {
     // Change to use NSScanner
     
     // define regex above
@@ -345,8 +345,10 @@
                 } else {
                     // no valid code found
                     // was not two hexadecimal digits
-                    [decodedMutableString appendFormat:@"=%c", [scanner.string characterAtIndex: scanner.scanLocation]];
-                    [scanner setScanLocation: ++(scanner.scanLocation)]; // skip "="
+                    if (scanner.scanLocation < scanner.string.length) {
+                        [decodedMutableString appendFormat:@"=%c", [scanner.string characterAtIndex: scanner.scanLocation]];
+                        [scanner setScanLocation: ++(scanner.scanLocation)]; // skip "="
+                    }
                 }
             }
         } else {

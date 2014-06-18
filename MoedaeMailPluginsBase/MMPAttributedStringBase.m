@@ -36,6 +36,8 @@
     
     [[nodeView textContainer] setContainerSize: NSMakeSize(FLT_MAX, FLT_MAX)];
     [[nodeView textContainer] setWidthTracksTextView: YES];
+    [nodeView setEditable: NO];
+    
     //    [self addSubview: nodeView];
     
     //    [nodeView setTranslatesAutoresizingMaskIntoConstraints: NO];
@@ -44,16 +46,6 @@
     
     //    [self setContentCompressionResistancePriority: NSLayoutPriorityFittingSizeCompression-1 forOrientation: NSLayoutConstraintOrientationVertical];
     //NSLayoutPriorityDefaultHigh
-    CGFloat borderWidth = 0.0;
-    [nodeView setWantsLayer: YES];
-    CALayer* rawLayer = nodeView.layer;
-    [rawLayer setBorderWidth: borderWidth];
-    [rawLayer setBorderColor: [[NSColor lightGrayColor] CGColor]];
-    
-    
-    CALayer* myLayer = self.layer;
-    [myLayer setBorderWidth: borderWidth*2];
-    [myLayer setBorderColor: [[NSColor redColor] CGColor]];
     
     self.mimeView = nodeView;
     

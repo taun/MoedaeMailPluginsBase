@@ -43,7 +43,8 @@
         // Initialization code here.
         [self setOptions: options];
         [self setNode: node];
-        self.loadingDidFinish = NO;
+        _loadingDidFinish = NO;
+        _constraintVMargin = 2.0;
     }
     return self;
 }
@@ -53,6 +54,24 @@
 }
 
 -(void) createSubviews {
+    
+    CGFloat borderWidth = 1.0;
+    CGFloat alpha = 0.01;
+    
+    [self.mimeView setWantsLayer: YES];
+
+    if (self.options.showViewOutlines) {
+        alpha = 0.4;
+        CALayer* rawLayer = self.mimeView.layer;
+        [rawLayer setBorderWidth: borderWidth];
+        [rawLayer setBorderColor: [[[NSColor greenColor] colorWithAlphaComponent: alpha] CGColor]];
+    }
+    
+    [self setWantsLayer: YES];
+    CALayer* myLayer = self.layer;
+    [myLayer setBorderWidth: borderWidth*2];
+    [myLayer setBorderColor: [[[NSColor redColor] colorWithAlphaComponent: alpha] CGColor]];
+    
     [self addSubview: self.mimeView];
     [self.mimeView setTranslatesAutoresizingMaskIntoConstraints: NO];
     [self.mimeView removeConstraints: self.mimeView.constraints];
@@ -72,7 +91,6 @@
     
     if (self.mimeView) {
         NSView* nodeView = self.mimeView;
-        CGFloat margin = 4.0;
         
         [self addConstraints:@[
                                [NSLayoutConstraint constraintWithItem: self
@@ -81,7 +99,7 @@
                                                                toItem: nodeView
                                                             attribute: NSLayoutAttributeTop
                                                            multiplier: 1.0
-                                                             constant: -margin],
+                                                             constant: -self.constraintVMargin],
                                
                                [NSLayoutConstraint constraintWithItem: self
                                                             attribute: NSLayoutAttributeLeft
@@ -89,7 +107,7 @@
                                                                toItem: nodeView
                                                             attribute: NSLayoutAttributeLeft
                                                            multiplier: 1.0
-                                                             constant: -margin],
+                                                             constant: -self.constraintVMargin],
                                
                                [NSLayoutConstraint constraintWithItem: self
                                                             attribute: NSLayoutAttributeBottom
@@ -97,7 +115,7 @@
                                                                toItem: nodeView
                                                             attribute: NSLayoutAttributeBottom
                                                            multiplier: 1.0
-                                                             constant: 2*margin],
+                                                             constant: self.constraintVMargin],
                                
                                [NSLayoutConstraint constraintWithItem: self
                                                             attribute: NSLayoutAttributeRight
@@ -105,12 +123,12 @@
                                                                toItem: nodeView
                                                             attribute: NSLayoutAttributeRight
                                                            multiplier: 1.0
-                                                             constant: margin],
+                                                             constant: self.constraintVMargin],
                                
                                ]];
         
-        [nodeView setContentHuggingPriority: 1000 forOrientation: NSLayoutConstraintOrientationHorizontal];
-        [nodeView setContentHuggingPriority: 750 forOrientation: NSLayoutConstraintOrientationVertical];
+        [nodeView setContentHuggingPriority: 500 forOrientation: NSLayoutConstraintOrientationHorizontal]; // was 1000
+        [nodeView setContentHuggingPriority: self.options.verticalHuggingPriority forOrientation: NSLayoutConstraintOrientationVertical];
         
         [nodeView setContentCompressionResistancePriority: 750 forOrientation: NSLayoutConstraintOrientationHorizontal];
         [nodeView setContentCompressionResistancePriority: 1000 forOrientation: NSLayoutConstraintOrientationVertical];

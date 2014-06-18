@@ -27,4 +27,8 @@
 
 @property (nonatomic,strong) NSDictionary   *attributes;
 
+@property (nonatomic,assign) BOOL           showViewOutlines;
+
+@property (nonatomic,assign) CGFloat        verticalHuggingPriority;
+
 @end
