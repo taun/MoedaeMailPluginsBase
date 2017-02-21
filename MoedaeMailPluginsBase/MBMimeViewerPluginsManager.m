@@ -49,10 +49,10 @@ NSString *ext = @"bundle";
 -(NSUInteger) loadPlugins {
     
     NSBundle *appBundle = [NSBundle mainBundle];
-//    NSString* plugInsPath = [appBundle builtInPlugInsPath];
     
+    // https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/LoadingCode/Tasks/LoadingBundles.html
     NSArray* bundlePaths = [appBundle pathsForResourcesOfType:@"mmmimeviewerplugin"
-                                         inDirectory:@"../PlugIns"];
+                                         inDirectory:@"PlugIns"];
     
     if ((bundlePaths.count >0) && (self.typeToClassMappings == nil)) {
         // only create the mapping if necessary
