@@ -7,9 +7,9 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "SimpleRFC822Address.h"
 #import "NSString+IMAPConversions.h"
 #import "NSScanner+IMAPConversions.h"
+#import "SimpleRFC822Address.h"
 
 @interface MoedaeMailPluginsBaseTests : XCTestCase
 
@@ -94,7 +94,7 @@
 
 #pragma mark - Email list tests
 -(void)testLongAddressesStringNamesWithCommasToSet {
-    NSString* emailString = @"\"Mike Lee\" <mlee@rdpartners.com>, <wilkins@umbi.umd.edu>, \"Clayton Cardin\" <clayton.cardin@verizon.net>, \"PaGeN\" <pagen@io.com>, \"David Wieger\" <davidmichaelw@hotmail.com>, \"Gary Seldon\" <garyseldon@earthlink.net>, \"Jeff Malmgren\" <coord@vul.bc.ca>, \"Mark Walker\" <mwalker@skyytek.com>, \"Nick Roberts\" <nroberts@cyberus.ca>, \"peter roper\" <roper@portofolio.com>, \"Pieter Botman\" <P.BOTMAN@IEEE.ORG>, <Puttyhead@aol.com>, \"rob seidenberg\" <robseidenberg@yahoo.com>, <apeters@bhsusa.com>, \"Jamie Demarest\" <Jamie_demarest@newton.mec.edu>, \"Charles Shoemaker\" <charles.shoemaker@tufts.edu>, \"Scott Todd\" <sasha@scottsasha.com>, \"Michael Fortman\" <mcfortman@yahoo.com>, \"Matt J and Lori B\" <maplerowfarm@yahoo.com>, \"terry plotkin\" <tplotkin@earthlink.net>, \"Bowen, Mike\" <mike.bowen@bmonb.com>, \"Mark Corsey\" <eclipsemc@earthlink.net>, \"rob botman\" <rob.botman@gmail.com>, \"Moran, Mark D\" <mdmoran@kpmg.ca>, \"Jeffrey Wood\" <jeff@agencynextdoor.com>, \"Glenn Ulmer\" <GUlmer@syscom-consulting.com>, \"Tim Friesen\" <tim.friesen@telusplanet.net>, \"David Finn\" <finner64@gmail.com>, <stephen.wiencke@bmo.com>, \"Bruton, Peter\" <bruton@NRCan.gc.ca>, \"Fielding, Craig\" <Craig.Fielding@cra-arc.gc.ca>, \"J. Invencio\" <bosgmasters@mac.com>, <canniff@canniff.net>, \"Dave Wilkins\" <wilkins@umbi.umd.edu>, \"B KIRBY\" <ber01906@berk.com>, \"Taun\" <taun@charcoalia.net>";
+    NSString* emailString = @"\"John Q. Public\" <email@example.com>, <email@subdomain.example.edu>, \"Jim James\" <firstname.lastname@example2.com>, \"Prince\" <email7@example.com>, \"Wise Man\" <email5@example.com>, \"Hari Seldon\" <email6@example.com>, \"Mousey Mouse\" <example2@sub.example2.ca>, \"Given Last\" <email1@example.ca>, \"Quick Nick\" <example3@example2.ca>, \"Who who who\" <last3@EXAMPLE.COM>, \"My Robot\" <g.last@EXAMPLE.ORG>, <email3@example.com>, \"BIG BOY\" <example4@example3.com>, <email2@example.com>, \"Gail Surname\" <firstname_lastname@example.u.edu>, \"First2 Surname\" <firstname.lastname@example2.edu>, \"Who who\" <last@EXAMPLE.COM>, \"Strong Arm\" <abc@example2.com>, \"Givena S1 and Givenb S2\" <maplerowfarm@yahoo.com>, \"Public, Janet\" <firstname.lastname@example.com>, \"Mary Public\" <email@example.co.jp>, \"Rob Public\" <a.b@example1.com>, \"Mary, Public Q\" <email@example.ca>, \"Jeff Public\" <firstname+lastname@example.com>, \"Given Surname\" <email@example-one.com>, \"Given Surname\" <firstname.lastname@example.net>, \"Given Surname\" <lastname@example.com>, <firstname.lastname@example.com>, \"last, first1\" <example3@example3.ca>, \"Surname, Given\" <firstname.lastname@abc-def.example.ca>, \"G. Surname\" <email4@example.com>, <example2@example2.net>, \"Dave Public\" <email@subdomain.example.edu>, \"G Surname\" <email1@example1.ca>";
     SimpleRFC822Address *newGroup = [SimpleRFC822Address newFromString: emailString];
 
     // log the correct address to create the reference set code.
@@ -104,42 +104,40 @@
 //    
     NSMutableSet* groupSet = [NSMutableSet new];
 
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Mark Walker" email: @"mwalker@skyytek.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Fielding, Craig" email: @"Craig.Fielding@cra-arc.gc.ca"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"B KIRBY" email: @"ber01906@berk.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Jeffrey Wood" email: @"jeff@agencynextdoor.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"rob botman" email: @"rob.botman@gmail.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"terry plotkin" email: @"tplotkin@earthlink.net"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Mark Corsey" email: @"eclipsemc@earthlink.net"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Moran, Mark D" email: @"mdmoran@kpmg.ca"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Charles Shoemaker" email: @"charles.shoemaker@tufts.edu"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Matt J and Lori B" email: @"maplerowfarm@yahoo.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Dave Wilkins" email: @"wilkins@umbi.umd.edu"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Clayton Cardin" email: @"clayton.cardin@verizon.net"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Michael Fortman" email: @"mcfortman@yahoo.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"canniff@canniff.net"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Bowen, Mike" email: @"mike.bowen@bmonb.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Jeff Malmgren" email: @"coord@vul.bc.ca"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Nick Roberts" email: @"nroberts@cyberus.ca"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Bruton, Peter" email: @"bruton@NRCan.gc.ca"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Glenn Ulmer" email: @"GUlmer@syscom-consulting.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"rob seidenberg" email: @"robseidenberg@yahoo.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Pieter Botman" email: @"P.BOTMAN@IEEE.ORG"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Tim Friesen" email: @"tim.friesen@telusplanet.net"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Scott Todd" email: @"sasha@scottsasha.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"peter roper" email: @"roper@portofolio.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"stephen.wiencke@bmo.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"apeters@bhsusa.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"Puttyhead@aol.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"wilkins@umbi.umd.edu"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"J. Invencio" email: @"bosgmasters@mac.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Jamie Demarest" email: @"Jamie_demarest@newton.mec.edu"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"David Wieger" email: @"davidmichaelw@hotmail.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"David Finn" email: @"finner64@gmail.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Gary Seldon" email: @"garyseldon@earthlink.net"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Mike Lee" email: @"mlee@rdpartners.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"PaGeN" email: @"pagen@io.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Taun" email: @"taun@charcoalia.net"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Given Last" email: @"email1@example.ca"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Surname, Given" email: @"firstname.lastname@abc-def.example.ca"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"G Surname" email: @"email1@example1.ca"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Jeff Public" email: @"firstname+lastname@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Rob Public" email: @"a.b@example1.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Mary Public" email: @"email@example.co.jp"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Mary, Public Q" email: @"email@example.ca"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"First2 Surname" email: @"firstname.lastname@example2.edu"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Givena S1 and Givenb S2" email: @"maplerowfarm@yahoo.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Dave Public" email: @"email@subdomain.example.edu"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Jim James" email: @"firstname.lastname@example2.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Strong Arm" email: @"abc@example2.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"example2@example2.net"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Public, Janet" email: @"firstname.lastname@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Mousey Mouse" email: @"example2@sub.example2.ca"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Quick Nick" email: @"example3@example2.ca"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"last, first1" email: @"example3@example3.ca"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Given Surname" email: @"email@example-one.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"BIG BOY" email: @"example4@example3.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"My Robot" email: @"g.last@EXAMPLE.ORG"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Given Surname" email: @"firstname.lastname@example.net"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Who who" email: @"last@EXAMPLE.COM"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Who who who" email: @"last3@EXAMPLE.COM"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"firstname.lastname@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"email2@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"email3@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"email@subdomain.example.edu"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"G. Surname" email: @"email4@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Gail Surname" email: @"firstname_lastname@example.u.edu"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Wise Man" email: @"email5@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Given Surname" email: @"lastname@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Hari Seldon" email: @"email6@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"John Q. Public" email: @"email@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Prince" email: @"email7@example.com"]];
     
     SimpleRFC822Address* refGroup = [SimpleRFC822Address newAddressesGroupNamed: @"" addresses: groupSet];
     
@@ -148,7 +146,7 @@
     XCTAssertTrue(result, );
 }
 -(void)testShorterLongAddressesStringNamesWithCommasToSet {
-    NSString* emailString = @"\"Bowen, Mike\" <mike.bowen@bmonb.com>, \"Mark Corsey\" <eclipsemc@earthlink.net>, \"rob botman\" <rob.botman@gmail.com>, \"Moran, Mark D\" <mdmoran@kpmg.ca>, \"Jeffrey Wood\" <jeff@agencynextdoor.com>, \"Glenn Ulmer\" <GUlmer@syscom-consulting.com>, \"Tim Friesen\" <tim.friesen@telusplanet.net>, \"David Finn\" <finner64@gmail.com>, <stephen.wiencke@bmo.com>";
+    NSString* emailString = @"\"Public, Janet\" <firstname.lastname@example.com>, \"Mary Public\" <email@example.co.jp>, \"Rob Public\" <a.b@example1.com>, \"Mary, Public Q\" <email@example.ca>, \"Jeff Public\" <firstname+lastname@example.com>, \"Given Surname\" <email@example-one.com>, \"Given Surname\" <firstname.lastname@example.net>, \"Given Surname\" <lastname@example.com>, <firstname.lastname@example.com>";
     SimpleRFC822Address *newGroup = [SimpleRFC822Address newFromString: emailString];
     
     // log the correct address to create the reference set code.
@@ -158,42 +156,15 @@
     //
     NSMutableSet* groupSet = [NSMutableSet new];
     
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Mark Walker" email: @"mwalker@skyytek.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Fielding, Craig" email: @"Craig.Fielding@cra-arc.gc.ca"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"B KIRBY" email: @"ber01906@berk.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Jeffrey Wood" email: @"jeff@agencynextdoor.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"rob botman" email: @"rob.botman@gmail.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"terry plotkin" email: @"tplotkin@earthlink.net"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Mark Corsey" email: @"eclipsemc@earthlink.net"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Moran, Mark D" email: @"mdmoran@kpmg.ca"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Charles Shoemaker" email: @"charles.shoemaker@tufts.edu"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Matt J and Lori B" email: @"maplerowfarm@yahoo.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Dave Wilkins" email: @"wilkins@umbi.umd.edu"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Clayton Cardin" email: @"clayton.cardin@verizon.net"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Michael Fortman" email: @"mcfortman@yahoo.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"canniff@canniff.net"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Bowen, Mike" email: @"mike.bowen@bmonb.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Jeff Malmgren" email: @"coord@vul.bc.ca"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Nick Roberts" email: @"nroberts@cyberus.ca"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Bruton, Peter" email: @"bruton@NRCan.gc.ca"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Glenn Ulmer" email: @"GUlmer@syscom-consulting.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"rob seidenberg" email: @"robseidenberg@yahoo.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Pieter Botman" email: @"P.BOTMAN@IEEE.ORG"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Tim Friesen" email: @"tim.friesen@telusplanet.net"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Scott Todd" email: @"sasha@scottsasha.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"peter roper" email: @"roper@portofolio.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"stephen.wiencke@bmo.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"apeters@bhsusa.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"Puttyhead@aol.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"wilkins@umbi.umd.edu"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"J. Invencio" email: @"bosgmasters@mac.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Jamie Demarest" email: @"Jamie_demarest@newton.mec.edu"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"David Wieger" email: @"davidmichaelw@hotmail.com"]];
-    [groupSet addObject: [SimpleRFC822Address newAddressName: @"David Finn" email: @"finner64@gmail.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Gary Seldon" email: @"garyseldon@earthlink.net"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Mike Lee" email: @"mlee@rdpartners.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"PaGeN" email: @"pagen@io.com"]];
-//    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Taun" email: @"taun@charcoalia.net"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Jeff Public" email: @"firstname+lastname@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Rob Public" email: @"a.b@example1.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Mary Public" email: @"email@example.co.jp"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Mary, Public Q" email: @"email@example.ca"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Public, Janet" email: @"firstname.lastname@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Given Surname" email: @"email@example-one.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Given Surname" email: @"firstname.lastname@example.net"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: nil email: @"firstname.lastname@example.com"]];
+    [groupSet addObject: [SimpleRFC822Address newAddressName: @"Given Surname" email: @"lastname@example.com"]];
     
     SimpleRFC822Address* refGroup = [SimpleRFC822Address newAddressesGroupNamed: @"" addresses: groupSet];
     
@@ -323,43 +294,35 @@
 #pragma mark - Embedded Group tests
 
 - (void) testCompressWhitespace1 {
-    NSString* stringWithWhitespace = @"Hi Taun,\n\
+    NSString* stringWithWhitespace = @"Hi John,\n\
     \n\
     \n\
     \n\
-    Dorothy Parshall invited you to like Friends Committee on National =\n\
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna =\n\
     \n\
-    Legislation.\n\
-    \n\
-    \n\
-    \n\
-    If you like Friends Committee on National Legislation follow the link =\n\
-    \n\
-below:\n\
-    \n\
-https://www.facebook.com/n/?pages%2Fx%2Fadd_fan%2F&id=3D121721071090&ori=\n\
-    \n\
-    =3Dpage_invite&ext=3D1399643458&hash=3DAeRUgPtcxhxqd8GL&aref=3D96131958&me=\n\
-    \n\
-    dium=3Demail&mid=3D9af4d70G60bba639G5badb76G4cGb509&bcode=3D1.1397051458.A=\n\
-    \n\
-    bm6rlw3Ckv03zUz&n_m=3Dtaun%40charcoalia.net\n\
+    aliqua.\n\
     \n\
     \n\
     \n\
-    To view Friends Committee on National Legislation follow the link below:\n\
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo =\n\
     \n\
-https://www.facebook.com/quakerlobby\n\
+consequat. \n\
+    \n\
+https://tools.ietf.org/html/rfc3501\n\
     \n\
     \n\
     \n\
-    Thanks,\n\
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. =\n\
+    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\
     \n\
-    The Facebook Team\n\
+    \n\
+    \n\
+    \n\
 ";
     
     NSString* compressed = [stringWithWhitespace mdcCompressWitespace];
-    NSString* refString = @"Hi Taun, Dorothy Parshall invited you to like Friends Committee on National = Legislation. If you like Friends Committee on National Legislation follow the link = below: https://www.facebook.com/n/?pages%2Fx%2Fadd_fan%2F&id=3D121721071090&ori= =3Dpage_invite&ext=3D1399643458&hash=3DAeRUgPtcxhxqd8GL&aref=3D96131958&me= dium=3Demail&mid=3D9af4d70G60bba639G5badb76G4cGb509&bcode=3D1.1397051458.A= bm6rlw3Ckv03zUz&n_m=3Dtaun%40charcoalia.net To view Friends Committee on National Legislation follow the link below: https://www.facebook.com/quakerlobby Thanks, The Facebook Team";
+    NSLog(@"%@", compressed);
+    NSString* refString = @"Hi John, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna = aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo = consequat. https://tools.ietf.org/html/rfc3501 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. = Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
     
     BOOL result = [compressed isEqualToString: refString];
     

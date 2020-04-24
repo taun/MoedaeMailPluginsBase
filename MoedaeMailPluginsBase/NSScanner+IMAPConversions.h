@@ -32,7 +32,7 @@
  
  @return a SimpleRFC822Address and the index incremented appropriately.
  
- @discussion
+ @discussion what discussion?
  
  -------------------
  Address Spec

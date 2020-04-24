@@ -78,12 +78,15 @@
 @property(readonly) BOOL                      showMe;
 @property(readonly) NSUInteger                count;
 
+/*!
 #pragma message "Comments could be left in name and email and removed for mailbox,domain. Are comments EVER used anymore? Does this matter?"
+*/
+
 /*!
  Assumes a properly formatted self contained email string from a parser/scanner or elsewhere.
  Passed string is decommented using mdcStringByRemovingRFCComments before parsing.
  
- @param emailString a valid RFC header string of emails.
+ @param anRfcGroupString a valid RFC header string of emails.
  
  @return a SimpleRFC822Address
  */
@@ -111,8 +114,8 @@
  Designated initializer
  
  @param name  NSString address description
- @param box
- @param domain
+ @param box NSString mail box identifier?
+ @param domain NSString standard domain?
  
  @return A SimpleRFC822Address
  */
